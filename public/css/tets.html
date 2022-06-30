@@ -1,0 +1,3523 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style type="text/css">
+    @font-face {
+      font-display: block;
+      font-family: "Janna-LT-W20-Regular";
+      src: url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/a9c47d30-0eca-434f-8082-ac141c4c97b3.eot?#iefix");
+      src: url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/a9c47d30-0eca-434f-8082-ac141c4c97b3.eot?#iefix") format("eot"), url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/26c24286-5aab-4747-81b9-54330e77fb14.woff") format("woff"), url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/9c4c7fff-85b6-442f-9726-af5f49d49e53.ttf") format("truetype"), url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/a24f53ee-e15e-4931-89a3-b6f17fbfcd72.svg#a24f53ee-e15e-4931-89a3-b6f17fbfcd72") format("svg");
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      font-family: Janna-LT-W20-Regular, sans-serif;
+      direction: ltr;
+
+    }
+
+    ::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: gray;
+      opacity: 1;
+      /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: gray;
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: gray;
+    }
+
+    :root {
+      --hue-neutral: 210;
+      --hue-wrong: 0;
+      --hue-correct: 145;
+    }
+
+
+
+
+    body {
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+
+      align-items: center;
+      background-color: white;
+      font-family: janna-lt-w20-regular, sans-serif;
+    }
+
+    body.correct {
+      background-color: #FED963;
+    }
+
+    body.wrong {
+      background-color: #FED963;
+    }
+
+    .container {
+      width: 800px;
+      max-width: 80%;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      border-radius: 0;
+      padding: 10px;
+      direction: ltr;
+      box-shadow: 0 0 10px 2px;
+      backdrop-filter: blur(6px);
+      font-family: janna-lt-w20-regular, sans-serif;
+    }
+
+    #question {
+      direction: ltr;
+      font-size: 23px;
+      font-weight: bold;
+      font-family: janna-lt-w20-regular, sans-serif;
+    }
+
+    .btn-grid {
+
+
+      font-size: 18px;
+
+      padding-left: 8%;
+
+
+    }
+
+    .slc-grid {
+
+      font-size: 18px;
+
+      padding-left: 8%;
+
+
+
+    }
+
+    .txt-grid {
+      display: grid;
+      grid-Template-Columns: repeat(1, auto);
+      gap: 10px;
+      margin: 20px 0;
+
+    }
+
+    .btn {
+      border: 1px solid #44848D;
+      background-color: #44848D;
+      border-radius: 0;
+      padding: 5px;
+      color: white;
+      outline: none;
+      font-size: 23px;
+      font-weight: bold;
+      width: 46%;
+      margin-top: 10px !important;
+    }
+
+    .btn:nth-child(odd) {
+      left: 0;
+    }
+
+    .btn:nth-child(even) {
+      margin-left: 5%;
+    }
+
+    .btn:hover {
+      border-color: black;
+    }
+
+    .btn.correct {
+      background-color: #FED963;
+      color: black;
+    }
+
+    .txt.wrong {
+      background-color: #FED963;
+      color: black;
+    }
+
+    .txt {
+      border: 1px solid grey;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 0;
+      padding: 5px;
+      color: black;
+      outline: none;
+      font-size: 23px;
+      font-weight: bold;
+    }
+    .fullname{
+      display: flex;
+      max-width: 200px;
+    }
+    .txt:hover {
+      border-color: black;
+    }
+
+    .txt.correct {
+      background-color: #FED963;
+      color: black;
+    }
+
+    .txt.wrong {
+      background-color: #FED963;
+      color: black;
+    }
+
+    .slc {
+
+      border: 1px solid #44848D;
+      background-color: #44848D;
+      border-radius: 0;
+      padding: 5px;
+      color: white;
+      outline: none;
+      font-size: 23px;
+      font-weight: bold;
+      width: 97%;
+      margin-top: 10px;
+    }
+
+    .slc:hover {
+      border-color: black;
+    }
+
+    .slc.correct {
+      background-color: #FED963;
+      color: black;
+    }
+
+    .slc.wrong {
+      background-color: #FED963;
+      color: black;
+    }
+
+    .start-btn,
+    .next-btn {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 0px 10px;
+      width: 90%;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    /* Background Styles Only */
+
+    @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+    #imgs {
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    html {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background-color: #DFDFDF;
+    }
+
+    .side-links {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+
+    .side-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      margin-bottom: 10px;
+      color: white;
+      width: 180px;
+      padding: 10px 0;
+      border-radius: 0;
+    }
+
+    .side-link-youtube {
+      background-color: red;
+    }
+
+
+
+    .side-link-github {
+      background-color: #6e5494;
+    }
+
+    .side-link-text {
+      margin-left: 10px;
+      font-size: 18px;
+    }
+
+    .side-link-icon {
+      color: white;
+      font-size: 30px;
+    }
+
+    #imgs {
+      transition-duration: 1000ms;
+    }
+
+    .note {
+      color: red;
+      font-size: small;
+      padding: 0;
+      margin-top: -8px;
+      margin-right: 4px;
+      gap: 0;
+    }
+
+    .float-parent {
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      align-items: center;
+      background-color: white;
+    }
+
+    .float-child {
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 100%;
+      width: 50%;
+      float: right;
+      padding: 20px;
+      border: 1px solid lightgray;
+      margin: auto;
+      max-height: 500px;
+    }
+
+    #question {
+      width: 90%;
+      padding-left: 30px;
+      padding-right: 30px;
+      font-size: 18px;
+    }
+
+    .descriptions {
+      width: 90%;
+      padding-left: 5px;
+      padding-right: 5px;
+      font-size: small;
+      color: gray;
+    }
+
+    @media only screen and (max-width: 600px) {
+      #question {
+        font-size: 14px;
+      }
+
+      .slc,
+      .txt,
+      .btn {
+        font-size: 14px;
+        margin: 0;
+      }
+
+      .start-btn,
+      .next-btn {
+        margin-top: 20px;
+      }
+
+      html,
+      body {
+        height: 0;
+      }
+
+      .float-parent {
+        display: flex;
+        float: left;
+        width: 100%;
+        height: 600px;
+        flex-direction: column;
+      }
+
+      #imgs {
+        margin: 0;
+        order: 2;
+        float: left;
+        width: 100%;
+        height: 300px;
+      }
+
+      #que {
+        margin: 0;
+        order: 1;
+        float: left;
+        width: 100%;
+        height: 300px;
+      }
+
+      h2 {
+        padding: 0;
+      }
+
+      .descriptions {
+        font-size: 8px;
+      }
+
+      .contact{
+        max-height: 23px;
+
+        margin: 0;
+        padding: 0;
+        grid-gap: 0;
+      }
+      .contact .txt{
+        max-height: 23px;
+        margin: 0;
+        padding: 0;
+        grid-gap: 0;
+      }
+      .lname{
+        display: none;
+      }
+    }
+
+    @media only screen and (min-width: 601px) {
+
+      .float-parent {
+        justify-content: center;
+        height: 500px;
+        max-height: 500px;
+      }
+
+    }
+  </style>
+
+</head>
+
+<body>
+  <center>
+    <h2 style='color:#44848D'>Are you eligible for Turkish citizenship? </h2>
+  </center>
+  <div class="float-parent">
+    <div id="imgs" class="float-child"></div>
+    <div id="que" class="float-child">
+
+      <div id="question-container" class="hide">
+        <div id="question">Question</div>
+        <div id="answer-buttons" class="btn-grid">
+          <div id="desc" class="descriptions"></div>
+        </div>
+
+      </div>
+      <div class="controls">
+        <button id="start-btn" class="start-btn btn">Start</button>
+        <button id="next-btn" class="next-btn btn hide">Next</button>
+      </div>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    const startButton = document.getElementById('start-btn')
+    const nextButton = document.getElementById('next-btn')
+    const questionContainerElement = document.getElementById('question-container')
+    const questionElement = document.getElementById('question')
+    const answerButtonsElement = document.getElementById('answer-buttons')
+    const answerTextElement = document.getElementById('answer-text')
+    const answerSelectElement = document.getElementById('answer-select ')
+    const ar = {
+      name: "",
+      lname:"",
+      email: "",
+      mobile: "",
+      NID:{ID:"0"},
+      Nationality:"",
+      RID:{ID:"0"},
+      Residence:"",
+      msgfrom:""
+    }
+    let currentQuestionIndex
+
+    startButton.addEventListener('click', startGame)
+    document.getElementById("question").innerHTML = "To find out the answer, we invite you to answer the following questions:"
+    questionContainerElement.classList.remove('hide')
+    nextButton.addEventListener('click', () => {
+      currentQuestionIndex++
+      setNextQuestion()
+    })
+    currentQuestionIndex = 0
+    function startGame() {
+      startButton.classList.add('hide')
+      questionContainerElement.classList.remove('hide')
+      setNextQuestion()
+    }
+
+    function setNextQuestion() {
+      resetState()
+
+      showQuestion(questions[currentQuestionIndex])
+    }
+
+    function showQuestion(question) {
+      if (questions[currentQuestionIndex].img != " ") {
+        document.getElementById("imgs").style.backgroundImage = "url('" + questions[currentQuestionIndex].img + "')"
+      }
+      pressed = currentQuestionIndex;
+      questionElement.innerText = question.question
+      if (question.type == 'yesno') {
+
+        const desc = document.createElement('p')
+        desc.id = "desc"
+        desc.classList.add("descriptions")
+        desc.innerText = question.description
+
+        question.answers.forEach(answer => {
+          answerButtonsElement.classList.remove('slc-grid')
+          answerButtonsElement.classList.remove('txt-grid')
+          answerButtonsElement.classList.add('btn-grid')
+          const button = document.createElement('button')
+          button.style.gridTemplateColumns = "repeat(2, auto)"
+          button.innerText = answer.text
+          button.classList.add('btn')
+          if (answer.correct) {
+            button.dataset.correct = answer.correct
+          }
+          button.addEventListener('click', selectAnswer)
+          answerButtonsElement.appendChild(button)
+        })
+        if (question.description != " ") {
+          answerButtonsElement.appendChild(desc)
+        }
+      }
+      else if (question.type == 'txt') {
+        answerButtonsElement.classList.remove('btn-grid')
+        answerButtonsElement.classList.remove('slc-grid')
+        answerButtonsElement.classList.add('txt-grid')
+
+        const div1 = document.createElement('div')
+        const div2 = document.createElement('div')
+        const div3 = document.createElement('div')
+
+        div1.classList.add("contact")
+        div2.classList.add("contact")
+        div3.classList.add("contact")
+
+        const name = document.createElement('input')
+        const lname = document.createElement('input')
+
+        name.id = "name"
+        name.placeholder = "First Name"
+        name.classList.add('txt')
+
+        lname.id = "lname"
+        lname.placeholder = "Last Name"
+        lname.classList.add('txt')
+
+        lname.classList.add('lname')
+
+
+
+        const el0 = document.createElement("span");
+        el0.innerText = "Correct Your Name!"
+        el0.classList.add('hide')
+        el0.classList.add('note')
+        el0.id = "namenote"
+
+        div1.appendChild(name)
+        div1.appendChild(el0)
+        div1.appendChild(lname)
+
+        const email = document.createElement('input')
+        email.id = "email"
+        email.placeholder = "Email"
+        email.classList.add('txt')
+
+        const el1 = document.createElement("span");
+        el1.innerText = "Correct your Email!"
+        el1.classList.add('hide')
+        el1.classList.add('note')
+        el1.id = "emailnote"
+
+        div2.appendChild(email)
+        div2.appendChild(el1)
+
+        const phone = document.createElement('input')
+        phone.id = "mobile"
+        phone.placeholder = "Mobile Number"
+        phone.classList.add('txt')
+
+        const el2 = document.createElement("span");
+        el2.innerText = "Enter Valid Mobile Number: i.e 539*******!"
+        el2.classList.add('hide')
+        el2.classList.add('note')
+        el2.id = "mobilenote"
+
+        div3.appendChild(phone)
+        div3.appendChild(el2)
+
+        const btn = document.createElement('button')
+        btn.id = "submitall"
+        btn.innerText = "Send"
+        btn.classList.add('btn')
+
+        //name.addEventListener('change',checkans)
+        //email.addEventListener('change',checkans)
+        //phone.addEventListener('change',checkans)
+        btn.addEventListener('click', checkans)
+
+        btn.dataset.correct = true
+        answerButtonsElement.appendChild(div1)
+        answerButtonsElement.appendChild(div2)
+        answerButtonsElement.appendChild(div3)
+        answerButtonsElement.appendChild(btn)
+      }
+      else if (question.type == 'slct') {
+        answerButtonsElement.classList.remove('btn-grid')
+        answerButtonsElement.classList.remove('txt-grid')
+        answerButtonsElement.classList.add('slc-grid')
+        const slct = document.createElement('select')
+        const desc = document.createElement('p')
+        desc.id = "desc"
+        desc.classList.add("descriptions")
+        slct.style.gridTemplateColumns = "repeat(1, auto)"
+        slct.classList.add('slc')
+        question.answers.forEach(answer => {
+          if (answer.correct) {
+            slct.innerHTML += '<option value="' + answer.text + ' data-correct="' + answer.correct + '">' + answer.text + '</option>'
+          } else {
+            slct.innerHTML += '<option id="nat" value="' + answer.text + '">' + answer.text + '</option>'
+          }
+          slct.addEventListener('change', selectAnswer)
+          answerButtonsElement.appendChild(slct)
+        })
+        desc.innerText = question.description
+        if (question.description != " ") {
+          answerButtonsElement.appendChild(desc)
+        }
+      }
+    }
+
+    function checkans(e) {
+      if (document.getElementById("name").value != "" && document.getElementById("email").value != "" && validateEmail(document.getElementById("email").value) && !isNaN(document.getElementById("mobile").value) && document.getElementById("mobile").value != "" && document.getElementById("mobile").value.length >= 10) {
+        Results.push({ question: "Name", answer: document.getElementById("name").value })
+        Results.push({ question: "Email", answer: document.getElementById("email").value })
+        Results.push({ question: "Mobile Number", answer: document.getElementById("mobile").value })
+        selectAnswer(e)
+      } else {
+
+        if (document.getElementById("name").value == "") {
+          document.getElementById("name").style.background = "lightpink"
+          document.getElementById("namenote").classList.remove('hide')
+        } else {
+          document.getElementById("name").style.background = "white"
+          document.getElementById("namenote").classList.add('hide')
+        }
+        if (document.getElementById("email").value == "" || !validateEmail(document.getElementById("email").value)) {
+          document.getElementById("email").style.background = "lightpink"
+          document.getElementById("emailnote").classList.remove('hide')
+        } else {
+          document.getElementById("email").style.background = "white"
+          document.getElementById("emailnote").classList.add('hide')
+        }
+        if (isNaN(document.getElementById("mobile").value) || document.getElementById("mobile").value == "" || document.getElementById("mobile").value.length < 10) {
+          document.getElementById("mobile").style.background = "lightpink"
+          document.getElementById("mobilenote").classList.remove('hide')
+        } else {
+          document.getElementById("mobile").style.background = "white"
+          document.getElementById("mobilenote").classList.add('hide')
+        }
+      }
+    }
+    function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+
+    function resetState() {
+      clearStatusClass(document.body)
+      nextButton.classList.add('hide')
+      while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+      }
+    }
+
+    function selectAnswer(e) {
+      const selectedButton = e.target
+      const correct = selectedButton.dataset.correct == "true" ? true : false
+      if (questions[currentQuestionIndex].answers[0].text == "Select") {
+        document.getElementById("nat").classList.add("hide")
+      }
+      setStatusClass(selectedButton, correct)
+
+      if (questions.length > currentQuestionIndex + 1) {
+
+      } else {
+        startButton.innerText = 'Finish'
+
+        nextButton.classList.add('hide')
+        ++currentQuestionIndex
+        if (questions.length == currentQuestionIndex) {
+          var hs = "";
+          window.parent.postMessage(Results, "https://www.eng.tdapartment.com/الجنسية");
+          for (var i = 0; i < Results.length; i++) {
+            hs += "<li>" + Results[i].question + " : " + Results[i].answer + "</li>"
+
+          }
+
+          ar.Nationality = Results[0].answer;
+          ar.Residence = Results[1].answer;
+
+
+          (function () {
+
+            'use strict';
+
+            window.BX24 = {};
+
+            /***************** private properties ******************/
+            var
+              isInit = false,
+              initList = [],
+              installList = [],
+
+              /* ready props */
+              isReady = false,
+              readyList = [],
+
+              /* list of registered proxy functions */
+              proxySalt = Math.random(),
+              proxyId = 1,
+              proxyList = [],
+              proxyContext = null,
+
+              /* list of registered event handlers */
+              eventsList = [],
+
+              /* chars list for string id generator */
+              charsList = '0123456789abcdefghijklmnopqrstuvwxyz';
+
+            /*************** public section ***********************/
+
+            BX24.init = function (callback) {
+              if (!!callback) {
+                initList.push(callback);
+              }
+            };
+
+            BX24.install = function (callback) {
+              if (!!callback) {
+                installList.push(callback);
+              }
+            };
+
+            BX24.installFinish = function () {
+              sendMessage('setInstallFinish', {});
+            };
+
+            BX24.callMethod = function (method, params, callback) {
+              // console.log('call method fired');
+
+              return ajax({
+                method: method,
+                data: params,
+                callback: callback
+              });
+            };
+
+            /*
+            calls = [[method,params],[method,params]];
+            calls = [{method:method,params:params},[method,params]];
+            calls = {call_id:[method,params],...};
+            */
+            BX24.callBatch = function (calls, callback, bHaltOnError) {
+              var cmd = util.type.isArray(calls) ? [] : {}, cnt = 0, cb = function (cmd) {
+                ajax.batch(cmd, callback, bHaltOnError);
+              };
+
+              for (var i in calls) {
+                var method = null, params = null;
+
+                if (!!calls[i] && calls.hasOwnProperty(i)) {
+                  if (util.type.isArray(calls[i])) {
+                    method = calls[i][0]; params = calls[i][1];
+                  }
+                  else if (!!calls[i].method) {
+                    method = calls[i].method; params = calls[i].params;
+                  }
+
+                  if (!!method) {
+                    cnt++;
+                    cmd[i] = [method, params];
+                  }
+                }
+              }
+
+              if (cnt > 0) {
+                var e = function (i) {
+                  return function (str) {
+                    cmd[i] = cmd[i][0] + "?" + str;
+                    if (--cnt <= 0)
+                      cb(cmd);
+                  }
+                }
+
+                for (var i in cmd) {
+                  ajax.prepareData(cmd[i][1], '', e(i));
+                }
+              }
+
+              return;
+            };
+
+            BX24.callBind = function (event, handler, auth_type, callback) {
+              if (!isInit) {
+                var _a = arguments;
+                BX24.init(function () {
+                  BX24.callBind.apply(document, _a);
+                });
+              }
+              else if (BX24.isAdmin()) {
+                var p = {
+                  event: event || '',
+                  handler: handler || '',
+                  auth_type: (typeof auth_type == 'undefined') ? 0 : auth_type
+                };
+
+                return BX24.callMethod('event.bind', p, callback);
+              }
+
+              return false;
+            };
+
+            BX24.callUnBind =
+              BX24.callUnbind = function (event, handler, auth_type, callback) {
+                if (!isInit) {
+                  var _a = arguments;
+                  BX24.init(function () {
+                    BX24.callUnBind.apply(document, _a);
+                  });
+                }
+                else if (BX24.isAdmin()) {
+                  var p = {
+                    event: event || '',
+                    handler: handler || ''
+                  };
+
+                  if (typeof auth_type != 'undefined' && auth_type !== null) {
+                    p.auth_type = auth_type;
+                  }
+
+                  return BX24.callMethod('event.unbind', p, callback);
+                }
+
+                return false;
+              };
+
+            BX24.canUse = function (method) {
+              switch (method) {
+                case "upload":
+                  return fileReader.canUse();
+                default:
+                  return true;
+              }
+            };
+
+            BX24.isAdmin = function () {
+              return !!PARAMS.IS_ADMIN;
+            };
+
+            BX24.getAuth = function () {
+              return (isInit && PARAMS.AUTH_EXPIRES > (new Date()).valueOf())
+                ? { access_token: PARAMS.AUTH_ID, refresh_token: PARAMS.REFRESH_ID, expires_in: PARAMS.AUTH_EXPIRES, domain: PARAMS.DOMAIN, member_id: PARAMS.MEMBER_ID }
+                : false;
+            };
+
+            BX24.getLang = function () {
+              return PARAMS.LANG;
+            };
+
+            BX24.getDomain = function () {
+              return PARAMS.DOMAIN;
+            };
+
+            BX24.refreshAuth = function (cb) {
+              if (isInit) {
+                sendMessage('refreshAuth', {}, function (p) {
+                  PARAMS.AUTH_ID = p.AUTH_ID;
+                  PARAMS.REFRESH_ID = p.REFRESH_ID;
+                  PARAMS.AUTH_EXPIRES = (new Date()).valueOf() + p.AUTH_EXPIRES * 1000;
+                  if (!!cb) {
+                    cb(BX24.getAuth());
+                  }
+                });
+              }
+            };
+
+            BX24.resizeWindow = function (width, height, cb) {
+              width = parseInt(width); height = parseInt(height);
+              if (width > 0 && height > 0) {
+                sendMessage('resizeWindow', { width: width, height: height }, cb);
+              }
+            };
+
+            BX24.fitWindow = function (cb) {
+              sendMessage('resizeWindow', {
+                width: '100%', height: BX24.getScrollSize().scrollHeight
+              }, cb);
+            };
+
+            BX24.reloadWindow = function (cb) {
+              sendMessage('reloadWindow', {}, cb);
+            };
+
+            BX24.setTitle = function (title, cb) {
+              sendMessage('setTitle', { title: title.toString() }, cb);
+            };
+
+            BX24.scrollParentWindow = function (scroll, cb) {
+              scroll = parseInt(scroll);
+              if (!isNaN(scroll)) {
+                sendMessage('setScroll', { scroll: scroll }, cb);
+              }
+            };
+
+            BX24.isReady = function () {
+              return !!isReady;
+            };
+
+            BX24.ready = function (handler) {
+              if (util.type.isFunction(handler)) {
+                readyList.push(handler);
+              }
+            };
+
+            BX24.proxy = function (func, thisObject) {
+              if (!func || !thisObject)
+                return func;
+
+              util.initObjectProxy(thisObject)
+
+              if (typeof func['__proxy_id_' + proxySalt] == 'undefined')
+                func['__proxy_id_' + proxySalt] = proxyId++;
+
+              if (!proxyList[thisObject['__proxy_id_' + proxySalt]][func['__proxy_id_' + proxySalt]])
+                proxyList[thisObject['__proxy_id_' + proxySalt]][func['__proxy_id_' + proxySalt]] = util.delegate(func, thisObject);
+
+              return proxyList[thisObject['__proxy_id_' + proxySalt]][func['__proxy_id_' + proxySalt]];
+            };
+
+            BX24.proxyContext = function () {
+              return proxyContext;
+            };
+
+            BX24.bind = function (el, evname, func) {
+              if (!el)
+                return;
+
+              if (evname === 'mousewheel') {
+                BX24.bind(el, 'DOMMouseScroll', func);
+              }
+              else if (evname === 'transitionend') {
+                BX24.bind(el, 'webkitTransitionEnd', func);
+                BX24.bind(el, 'msTransitionEnd', func);
+                BX24.bind(el, 'oTransitionEnd', func);
+                // IE8-9 doesn't support this feature!
+              }
+
+              if (el.addEventListener)
+                el.addEventListener(evname, func, false);
+              else if (el.attachEvent) // IE
+                el.attachEvent("on" + evname, BX24.proxy(func, el));
+              else
+                el["on" + evname] = func;
+
+              eventsList[eventsList.length] = { 'element': el, 'event': evname, 'fn': func };
+
+            };
+
+            BX24.unbind = function (el, evname, func) {
+              if (!el)
+                return;
+
+              if (evname === 'mousewheel')
+                BX24.unbind(el, 'DOMMouseScroll', func);
+
+              if (el.removeEventListener) // Gecko / W3C
+                el.removeEventListener(evname, func, false);
+              else if (el.detachEvent) // IE
+                el.detachEvent("on" + evname, BX24.proxy(func, el));
+              else
+                el["on" + evname] = null;
+            };
+
+            BX24.getScrollSize = function () {
+              return {
+                scrollWidth: Math.max(document.documentElement.scrollWidth, document.documentElement.offsetWidth),
+                scrollHeight: Math.max(document.documentElement.scrollHeight, document.documentElement.offsetHeight)
+              };
+            };
+
+            BX24.selectAccess = function (title, value, cb) {
+              if (!util.type.isString(title)) {
+                cb = value; value = title;
+              }
+
+              if (util.type.isFunction(value)) {
+                cb = value; value = [];
+              }
+
+              sendMessage('selectAccess', { value: value }, cb);
+            };
+
+            BX24.selectUser = function (title, cb) {
+              if (util.type.isFunction(title)) {
+                cb = title; title = '';
+              }
+
+              sendMessage('selectUser', { title: title, mult: false }, cb);
+            };
+
+            BX24.selectUsers = function (title, cb) {
+              if (util.type.isFunction(title)) {
+                cb = title; title = '';
+              }
+
+              sendMessage('selectUser', { title: title, mult: true }, cb);
+            };
+
+            BX24.selectCRM = function (params, cb) {
+              if (util.type.isFunction(params)) {
+                cb = params;
+                params = {};
+              }
+
+              sendMessage('selectCRM', {
+                entityType: params.entityType,
+                multiple: params.multiple,
+                value: params.value,
+              }, cb);
+            };
+
+            BX24.openApplication = function (params, cb) {
+              if (util.type.isFunction(params)) {
+                cb = params;
+                params = {};
+              }
+
+              sendMessage('openApplication', params, cb);
+            };
+
+            BX24.closeApplication = function (cb) {
+              sendMessage('closeApplication', cb);
+            };
+
+            BX24.im = {
+              callTo: function (userId, video) {
+                sendMessage('imCallTo', { userId: userId, video: video });
+              },
+              phoneTo: function (phone) {
+                sendMessage('imPhoneTo', { phone: phone });
+              },
+              openMessenger: function (dialogId) {
+                sendMessage('imOpenMessenger', { dialogId: dialogId });
+              },
+              openHistory: function (dialogId) {
+                sendMessage('imOpenHistory', { dialogId: dialogId });
+              }
+            };
+
+            BX24.placement = {
+
+              info: function () {
+                return {
+                  placement: PARAMS.PLACEMENT,
+                  options: PARAMS.PLACEMENT_OPTIONS
+                }
+              },
+
+              getInterface: function (cb) {
+                sendMessage('getInterface', cb);
+              },
+
+              call: function (cmd, params, cb) {
+                if (!!BX24[cmd]) {
+                  return;
+                }
+                else {
+                  if (util.type.isFunction(params)) {
+                    cb = params;
+                    params = {};
+                  }
+
+                  sendMessage(cmd, params, cb);
+                }
+              },
+
+              bindEvent: function (eventName, cb) {
+                sendMessage('placementBindEvent', { event: eventName }, cb);
+              }
+            };
+
+            BX24.loadScript = function (script, callback) {
+              if (!isReady) {
+                var _args = arguments;
+                BX24.ready(function () {
+                  BX24.loadScript.apply(this, _args);
+                });
+                return;
+              }
+
+              if (util.type.isString(script))
+                script = [script];
+              var _callback = function () {
+                return (callback && util.type.isFunction(callback)) ? callback() : null
+              }
+              var load_js = function (ind) {
+                if (ind >= script.length)
+                  return _callback();
+
+                if (!!script[ind]) {
+                  var oHead = document.getElementsByTagName("HEAD")[0] || document.documentElement;
+                  var oScript = document.createElement('SCRIPT');
+                  oScript.setAttribute('charset', 'UTF-8');
+
+                  oScript.src = script[ind];
+
+                  var bLoaded = false;
+                  oScript.onload = oScript.onreadystatechange = function () {
+                    if (!bLoaded && (!oScript.readyState || oScript.readyState == "loaded" || oScript.readyState == "complete")) {
+                      bLoaded = true;
+                      setTimeout(function () { load_js(++ind); }, 50);
+
+                      oScript.onload = oScript.onreadystatechange = null;
+                      if (oHead && oScript.parentNode) {
+                        oHead.removeChild(oScript);
+                      }
+                    }
+                  }
+
+                  return oHead.insertBefore(oScript, oHead.firstChild);
+                }
+                else {
+                  load_js(++ind);
+                }
+              }
+
+              load_js(0);
+            };
+
+            BX24.userOption = BX24.appOption = {
+              get: function () { }, set: function () { }
+            };
+
+            BX24.init(function () {
+              BX24.userOption = {
+                get: function (name) {
+                  return PARAMS.USER_OPTIONS[name];
+                },
+                set: function (name, value) {
+                  PARAMS.USER_OPTIONS[name] = value;
+                  sendMessage('setUserOption', { name: name, value: value });
+                }
+              };
+
+              BX24.appOption = {
+                get: function (name) {
+                  return PARAMS.APP_OPTIONS[name];
+                },
+                set: BX24.isAdmin() ? function (name, value, cb) {
+                  PARAMS.APP_OPTIONS[name] = value;
+                  sendMessage('setAppOption', { name: name, value: value }, cb);
+                } : util.blank
+              };
+            });
+            /*************** private section ***********************/
+
+            // utility
+            var util = {
+              blank: function () { },
+              init: function () {
+                var f = function (data) {
+                  if (!PARAMS.DOMAIN)
+                    PARAMS.DOMAIN = data.DOMAIN;
+                  if (!PARAMS.PATH)
+                    PARAMS.PATH = data.PATH;
+                  if (!PARAMS.LANG)
+                    PARAMS.LANG = data.LANG;
+                  if (!PARAMS.PLACEMENT)
+                    PARAMS.PLACEMENT = data.PLACEMENT;
+
+                  PARAMS.PROTOCOL = data.PROTOCOL;
+                  PARAMS.DOMAIN = PARAMS.DOMAIN.replace(/\:(80|443)$/, '');
+
+                  if (!!data.AUTH_ID) {
+                    PARAMS.AUTH_ID = data.AUTH_ID;
+                    PARAMS.REFRESH_ID = data.REFRESH_ID;
+                    PARAMS.AUTH_EXPIRES = (new Date()).valueOf() + data.AUTH_EXPIRES * 1000;
+                    PARAMS.IS_ADMIN = !!data.IS_ADMIN;
+                    PARAMS.MEMBER_ID = data.MEMBER_ID || '';
+                  }
+
+                  if (!PARAMS.USER_OPTIONS)
+                    PARAMS.USER_OPTIONS = data.USER_OPTIONS;
+
+                  if (!PARAMS.APP_OPTIONS)
+                    PARAMS.APP_OPTIONS = data.APP_OPTIONS;
+
+                  if (!PARAMS.PLACEMENT_OPTIONS)
+                    PARAMS.PLACEMENT_OPTIONS = data.PLACEMENT_OPTIONS;
+
+                  isInit = true;
+
+                  var doInit = function () {
+                    BX24.init = function (fn) {
+                      util.defer(fn).call(document);
+                    }
+
+                    if (!data.INSTALL) {
+                      BX24.installFinish = util.blank;
+                    }
+
+                    var fn, i = 0;
+                    while (initList && (fn = initList[i++])) {
+                      BX24.init(fn);
+                    }
+                  }
+
+                  if (!!data.FIRST_RUN && installList.length > 0) {
+                    util.install(doInit);
+                  }
+                  else {
+                    doInit();
+                  }
+                }
+
+                // if(!PARAMS.DOMAIN||!PARAMS.LANG||!PARAMS.AUTH_ID)
+                // {console.log('testt');
+                // 	sendMessage('getInitData', f);
+                // }
+                if (!PARAMS.DOMAIN) {
+                  sendMessage('getInitData', f);
+                }
+                else {
+                  f(PARAMS);
+                }
+
+                util.init = util.blank;
+              },
+
+              install: function (cb) {
+                var installer = null,
+                  installFinish = function () {
+                    util.install(cb);
+                  };
+
+                installer = installList.shift();
+                if (!!installer) {
+                  if (util.type.isFunction(installer)) {
+                    try {
+                      BX24.installFinish = installFinish;
+                      installer.call(document); // no defer!
+                    }
+                    catch (e) {
+                      alert('Installation failed!');
+                      console.log(e);
+                    }
+                  }
+                  else {
+                    BX24.loadScript(installer, function () {
+                      BX24.installFinish = installFinish;
+                    });
+                  }
+                }
+                else {
+                  BX24.installFinish = util.install = util.blank;
+                  sendMessage('setInstall', { install: true });
+
+                  util.defer(cb).call(document);
+                }
+              },
+
+              ready: function () {
+                if (document.readyState === "complete") {
+                  return util.runReady();
+                }
+
+                var __readyHandler;
+                if (document.addEventListener) {
+                  __readyHandler = function () {
+                    document.removeEventListener("DOMContentLoaded", __readyHandler, false);
+                    util.runReady();
+                  }
+                  document.addEventListener("DOMContentLoaded", __readyHandler, false);
+                  window.addEventListener("load", util.runReady, false);
+                }
+                else if (document.attachEvent) {
+                  __readyHandler = function () {
+                    if (document.readyState === "complete") {
+                      document.detachEvent("onreadystatechange", __readyHandler);
+                      util.runReady();
+                    }
+                  }
+                  document.attachEvent("onreadystatechange", __readyHandler);
+                  window.attachEvent("onload", util.runReady);
+                }
+
+                util.ready = util.blank;
+
+                return null;
+              },
+
+              runReady: function () {
+                if (!isReady) {
+                  if (!document.body)
+                    return setTimeout(util.runReady, 15);
+
+                  isReady = true;
+
+                  BX24.ready = function (handler) {
+                    if (util.type.isFunction(handler)) {
+                      util.defer(handler).call(document);
+                    }
+                  };
+
+                  if (readyList && readyList.length > 0) {
+                    var fn, i = 0;
+                    while (readyList && (fn = readyList[i++])) {
+                      BX24.ready(fn);
+                    }
+
+                    readyList = null;
+                  }
+                }
+
+                return null;
+              },
+
+              delegate: function (func, thisObject) {
+                if (!func || !thisObject)
+                  return func;
+
+                return function () {
+                  var cur = proxyContext;
+                  proxyContext = this;
+                  var res = func.apply(thisObject, arguments);
+                  proxyContext = cur;
+                  return res;
+                }
+              },
+
+              initObjectProxy: function (thisObject) {
+                if (typeof thisObject['__proxy_id_' + proxySalt] == 'undefined') {
+                  thisObject['__proxy_id_' + proxySalt] = proxyList.length;
+                  proxyList[thisObject['__proxy_id_' + proxySalt]] = {};
+                }
+              },
+
+              defer: function (fn, t) {
+                return function () {
+                  var arg = arguments;
+                  setTimeout(function () { fn.apply(this, arg) }, t || 10);
+                };
+              },
+
+              split: function (s, ss) {
+                var r = s.split(ss);
+                return [r[0], r.slice(1).join(ss)];
+              },
+
+              clone: function (obj, bCopyObj) {
+                var _obj, i, l;
+                if (bCopyObj !== false)
+                  bCopyObj = true;
+
+                if (obj === null)
+                  return null;
+
+                if (util.type.isDomNode(obj)) {
+                  _obj = obj.cloneNode(bCopyObj);
+                }
+                else if (typeof obj == 'object') {
+                  if (util.type.isArray(obj)) {
+                    _obj = [];
+                    for (i = 0, l = obj.length; i < l; i++) {
+                      if (typeof obj[i] == "object" && bCopyObj)
+                        _obj[i] = util.clone(obj[i], bCopyObj);
+                      else
+                        _obj[i] = obj[i];
+                    }
+                  }
+                  else {
+                    _obj = {};
+                    if (obj.constructor) {
+                      if (obj.constructor === Date)
+                        _obj = new Date(obj);
+                      else
+                        _obj = new obj.constructor();
+                    }
+
+                    for (i in obj) {
+                      if (typeof obj[i] == "object" && bCopyObj)
+                        _obj[i] = util.clone(obj[i], bCopyObj);
+                      else
+                        _obj[i] = obj[i];
+                    }
+                  }
+
+                }
+                else {
+                  _obj = obj;
+                }
+
+                return _obj;
+              },
+
+              uniqid: function () {
+                var s = '';
+                for (var i = 0; i < 32; i++)
+                  s += charsList[Math.round(Math.random() * (charsList.length - 1))];
+                return s;
+              },
+
+              // datatype utility
+              type: {
+                isString: function (item) {
+                  return item === '' ? true : (item ? (typeof (item) == "string" || item instanceof String) : false);
+                },
+                isNotEmptyString: function (item) {
+                  return util.type.isString(item) ? item.length > 0 : false;
+                },
+                isBoolean: function (item) {
+                  return item === true || item === false;
+                },
+                isNumber: function (item) {
+                  return item === 0 ? true : (item ? (typeof (item) == "number" || item instanceof Number) : false);
+                },
+                isFunction: function (item) {
+                  return item === null ? false : (typeof (item) == "function" || item instanceof Function);
+                },
+                isElementNode: function (item) {
+                  return item && typeof (item) == "object" && "nodeType" in item && item.nodeType == 1 && item.tagName && item.tagName.toUpperCase() != 'SCRIPT' && item.tagName.toUpperCase() != 'STYLE' && item.tagName.toUpperCase() != 'LINK';
+                },
+                isDomNode: function (item) {
+                  return item && typeof (item) == "object" && "nodeType" in item;
+                },
+                isArray: function (item) {
+                  return item && Object.prototype.toString.call(item) == "[object Array]";
+                },
+                isDate: function (item) {
+                  return item && Object.prototype.toString.call(item) == "[object Date]";
+                }
+              }
+            };
+
+            // communication with parent frame utility
+            var sendMessage = function (cmd, params, cb) {
+              if (util.type.isFunction(params)) {
+                cb = params; params = null;
+              }
+
+              cmd += ':' + (!!params ? JSON.stringify(params) : '')
+                + ':' + sendMessage.setCallback(cb)
+                + (!!PARAMS.APP_SID ? (':' + PARAMS.APP_SID) : '');
+
+              parent.postMessage(cmd, 'http' + (PARAMS.PROTOCOL ? 's' : '') + '://' + PARAMS.DOMAIN);
+            };
+
+            sendMessage.setCallback = function (cb) {
+              var cbId = '';
+              if (!!cb) {
+                cbId = util.uniqid();
+                sendMessage[cbId] = cb;
+              }
+
+              return cbId;
+            };
+
+            sendMessage.runCallback = function (e) {
+              e = e || window.event;
+
+              if (e.origin != 'http' + (PARAMS.PROTOCOL ? 's' : '') + '://' + PARAMS.DOMAIN)
+                return;
+
+              if (!!e.data) {
+                var cmd = util.split(e.data, ':', 2),
+                  args = [];
+
+                if (!!sendMessage[cmd[0]]) {
+                  if (!!cmd[1])
+                    args = JSON.parse(cmd[1]);
+
+                  sendMessage[cmd[0]].apply(window, [args]);
+                }
+              }
+            };
+
+            var ajax = function (config) {
+              RestrictionManager.check(function () {
+                ajax.call(config);
+              });
+            }
+
+            ajax.call = function (config) {
+              if (!isInit) {
+                BX24.init(function () {
+                  ajax.call(config);
+                });
+              }
+              // else if(PARAMS.AUTH_EXPIRES < (new Date()).valueOf())
+              // {
+              // 	ajax.refreshAuth(config);
+              // }
+              else {
+                var xhr = ajax.xhr(),
+                  url = 'http' + (PARAMS.PROTOCOL ? 's' : '') + '://' + PARAMS.DOMAIN + PARAMS.PATH + '/' + ajax.escape(config.method) + '.json';
+
+                xhr.open('POST', url);
+
+                var bRequestCompleted = false;
+
+                // IE fix
+                xhr.onprogress = function () { };
+                xhr.ontimeout = function () { };
+                xhr.timeout = 0;
+
+                xhr.onload = function () {
+                  if (bRequestCompleted)
+                    return;
+
+                  xhr.onload = util.blank;
+
+                  var bSuccess = ajax.isSuccess(xhr);
+
+                  if (bSuccess) {
+                    var data = xhr.responseText;
+
+                    if (data.length > 0) {
+                      try {
+                        data = JSON.parse(data);
+                      } catch (e) { bSuccess = false; }
+                    }
+                    else {
+                      data = { result: {} };
+                    }
+                  }
+
+                  var s = xhr.status;
+
+                  xhr = null;
+
+                  if (bSuccess) {
+                    if (data.error && data.error == 'expired_token') {
+                      ajax.refreshAuth(config);
+                    }
+                    else if (!!config.callback && util.type.isFunction(config.callback)) {
+                      var res = new ajaxResult(data, config, s);
+                      config.callback.apply(window, [res]);
+                    }
+                  }
+                  else {
+                    throw ('Query error!');
+                  }
+                };
+
+                xhr.onerror = function () {
+                  throw ('Query error!');
+                };
+
+                var query_data = 'auth=' + PARAMS.AUTH_ID;
+
+                if (typeof config.start != 'undefined') {
+                  query_data += '&start=' + parseInt(config.start);
+                }
+
+                if (!!config.data) {
+                  if (!!config.data['start']) {
+                    delete config.data['start'];
+                  }
+
+                  ajax.prepareData(config.data, '', function (res) {
+                    query_data += '&' + res;
+                    util.defer(xhr.send.bind(xhr))(query_data);
+                  });
+                }
+                else {
+                  util.defer(xhr.send.bind(xhr))(query_data);
+                }
+
+                return xhr;
+              }
+            };
+
+            ajax.batch = function (calls, callback, bHaltOnError) {
+              return ajax({
+                method: 'batch',
+                data: { halt: !!bHaltOnError ? 1 : 0, cmd: calls },
+                callback: function (res, config, status) {
+                  if (!!callback) {
+                    var data = res.data(),
+                      result = util.type.isArray(calls) ? [] : {};
+
+                    for (var i in calls) {
+                      if (!!calls[i] && calls.hasOwnProperty(i)) {
+                        if (typeof data.result[i] !== 'undefined' || typeof data.result_error[i] !== 'undefined') {
+                          if (util.type.isString(calls[i])) {
+                            var q = calls[i].split("?");
+                          }
+                          else {
+                            q = [
+                              util.type.isArray(calls[i]) ? calls[i][0] : calls[i].method,
+                              util.type.isArray(calls[i]) ? calls[i][1] : calls[i].data,
+                            ];
+                          }
+
+                          result[i] = new ajaxResult({
+                            result: typeof data.result[i] !== 'undefined' ? data.result[i] : {},
+                            error: data.result_error[i] || undefined,
+                            total: data.result_total[i],
+                            next: data.result_next[i]
+                          }, {
+                            method: q[0],
+                            data: q[1],
+                            callback: callback
+                          }, res.status);
+                        }
+                      }
+                    }
+
+                    callback.apply(window, [result]);
+                  }
+                }
+              });
+            };
+
+            ajax.refreshAuth = function (config) {
+              BX24.refreshAuth(function () {
+                ajax(config)
+              });
+            };
+
+            ajax.xhr = function () {
+              if (!!window.XDomainRequest)
+                return new XDomainRequest();
+              else
+                return new XMLHttpRequest();
+            };
+
+            ajax.escape = function (str) {
+              return encodeURIComponent(str);
+            };
+
+            ajax.prepareData = function (arData, prefix, callback) {
+              // console.log('prepare data');
+              var data = '', objects = [];
+              if (util.type.isString(arData) || arData == null) {
+                callback.call(document, arData || '');
+              }
+              else {
+                for (var i in arData) {
+                  if (!arData.hasOwnProperty(i)) {
+                    continue;
+                  }
+
+                  var name = ajax.escape(i);
+
+                  if (prefix)
+                    name = prefix + '[' + name + ']';
+
+                  if (typeof arData[i] == 'object') {
+                    objects.push([name, arData[i]]);
+                  }
+                  else {
+                    if (data.length > 0) {
+                      data += '&';
+                    }
+
+                    data += name + '=' + ajax.escape(arData[i])
+                  }
+                }
+
+                var cnt = objects.length;
+                if (cnt > 0) {
+                  var cb = function (str) {
+                    data += (!!str ? '&' : '') + str;
+                    if (--cnt <= 0) {
+                      callback.call(document, data)
+                    }
+                  }
+
+                  var cnt1 = cnt;
+                  for (var i = 0; i < cnt1; i++) {
+                    if (util.type.isDomNode(objects[i][1])) {
+                      if (objects[i][1].tagName.toUpperCase() == 'INPUT' && objects[i][1].type == 'file') {
+
+                        // console.log('if file fired');
+
+                        if (fileReader.canUse()) {
+                          fileReader(objects[i][1], (function (name) {
+                            return function (result) {
+                              if (util.type.isArray(result) && result.length > 0) {
+                                cb(name + '[0]=' + ajax.escape(result[0]) + '&' + name + '[1]=' + ajax.escape(result[1]));
+                              }
+                              else {
+                                cb(name + '=');
+                              }
+                            }
+                          })(objects[i][0]));
+                        }
+                      }
+                      else if (typeof objects[i][1].value != 'undefined') {
+                        cb(objects[i][0] + '=' + ajax.escape(objects[i][1].value));
+                      }
+                      else {
+                        cb('');
+                      }
+                    }
+                    else if (util.type.isDate(objects[i][1])) {
+                      cb(objects[i][0] + '=' + ajax.escape(objects[i][1].toJSON()));
+                    }
+                    else if (util.type.isArray(objects[i][1]) && objects[i][1].length <= 0) {
+                      cb(objects[i][0] + '=');
+                    }
+                    else {
+                      ajax.prepareData(objects[i][1], objects[i][0], cb);
+                    }
+                  }
+                }
+                else {
+                  callback.call(document, data)
+                }
+              }
+            };
+
+            ajax.isSuccess = function (xhr) {
+              return typeof xhr.status == 'undefined' || (xhr.status >= 200 && xhr.status < 300) || xhr.status === 304 || xhr.status >= 400 && xhr.status < 500 || xhr.status === 1223 || xhr.status === 0;
+            };
+
+            var ajaxResult = function (answer, query, status) {
+              this.answer = answer;
+              this.query = util.clone(query);
+              this.status = status;
+
+              if (typeof this.answer.next != 'undefined') {
+                this.answer.next = parseInt(this.answer.next);
+              }
+
+              if (typeof this.answer.error != 'undefined') {
+                this.answer.ex = new ajaxError(this.status, typeof this.answer.error == 'string' ? this.answer : this.answer.error)
+              }
+            };
+
+            ajaxResult.prototype.data = function () {
+              return this.answer.result;
+            };
+
+            ajaxResult.prototype.error = function () {
+              return this.answer.ex;
+            };
+
+            ajaxResult.prototype.error_description = function () {
+              return this.answer.error_description;
+            };
+
+            ajaxResult.prototype.more = function () {
+              return !isNaN(this.answer.next);
+            };
+
+            ajaxResult.prototype.total = function () {
+              return parseInt(this.answer.total);
+            };
+
+            ajaxResult.prototype.next = function (cb) {
+              if (this.more()) {
+                this.query.start = this.answer.next;
+
+                if (!!cb && util.type.isFunction(cb)) {
+                  this.query.callback = cb;
+                }
+
+                return ajax(this.query);
+              }
+
+              return false;
+            };
+
+            var ajaxError = function (status, ex) {
+              this.status = status;
+              this.ex = ex;
+            };
+
+            ajaxError.prototype.getError = function () {
+              return this.ex;
+            };
+
+            ajaxError.prototype.getStatus = function () {
+              return this.status;
+            };
+
+            ajaxError.prototype.toString = function () {
+              return this.ex.error + (
+                !!this.ex.error_description
+                  ? ': ' + this.ex.error_description
+                  : ''
+              ) + ' (' + this.status + ')';
+            };
+
+
+            var fileReader = function (fileInput, cb) {
+              if (fileReader.canUse()) {
+                // console.log('file reader fired');
+
+                var files = fileInput.files,
+                  len = 0,
+                  result = fileInput.multiple ? [] : null;
+
+                for (var i = 0, f; f = files[i]; i++) {
+                  var reader = new window.FileReader();
+
+                  reader.BXFILENAME = files[i].name;
+
+                  reader.onload = function (e) {
+                    e = e || window.event;
+
+                    var res = [this.BXFILENAME, btoa(e.target.result)];
+
+                    if (result === null)
+                      result = res;
+                    else
+                      result.push(res);
+
+                    if (--len <= 0) {
+                      cb(result);
+                    }
+                  };
+
+                  reader.readAsBinaryString(f);
+                }
+                len = i;
+                if (len <= 0) {
+                  cb(result);
+                }
+              }
+            };
+
+            fileReader.canUse = function () {
+              return !!window.FileReader;
+            };
+
+            var RestrictionManager = function () {
+              var _ = this;
+
+              this.param = {
+                SLEEP: 1000,
+                ALLOWED_SPEED: 0.002,
+                ALLOWED_AMOUNT: 90
+              };
+
+              this.storage = {
+                lastDecrement: 0,
+                currentAmount: 0
+              };
+
+              this.wait = function (callback) {
+                return util.defer(function () {
+                  return _.check(callback);
+                }, this.param.SLEEP);
+              };
+            };
+
+            RestrictionManager.prototype.check = function (callback) {
+              this.decrementStorage();
+
+              if (!this.checkStorage()) {
+                this.wait(callback)();
+              }
+              else {
+                this.incrementStorage();
+
+                this.run(callback);
+              }
+            };
+
+            RestrictionManager.prototype.run = function (callback) {
+              callback();
+            }
+
+            RestrictionManager.prototype.decrementStorage = function () {
+              if (this.storage.lastDecrement > 0) {
+                this.storage.currentAmount -= ((new Date()).valueOf() - this.storage.lastDecrement) * this.param.ALLOWED_SPEED;
+
+                if (this.storage.currentAmount < 0) {
+                  this.storage.currentAmount = 0;
+                }
+              }
+
+              this.storage.lastDecrement = (new Date()).valueOf();
+            };
+
+            RestrictionManager.prototype.checkStorage = function () {
+              return this.storage.currentAmount < this.param.ALLOWED_AMOUNT;
+            };
+
+            RestrictionManager.prototype.incrementStorage = function () {
+              this.storage.currentAmount++;
+            };
+
+            /***************** exec ********************************/
+
+            // AUTH_ID can also be set via GET, but it's not recommended due to security reasons
+
+            var PARAMS = {
+              DOMAIN: 'b24-woyl1v.bitrix24.com/',
+              PROTOCOL: 1,
+              APP_SID: false,
+              PATH: 'rest/33/70eke3vcm3ucjy31',
+              LANG: '',
+              AUTH_ID: '',
+              REFRESH_ID: null,
+              MEMBER_ID: null,
+              PLACEMENT: null,
+              IS_ADMIN: false,
+              AUTH_EXPIRES: 0,
+              USER_OPTIONS: null,
+              APP_OPTIONS: null,
+              PLACEMENT_OPTIONS: null
+            };
+            //body.innerHTML = body.innerHTML.replace(/fuck|shit|bitch/gi, '***');
+
+            // if(!!window.name)
+            // {
+            // 	var q = window.name.split('|');
+            // 	PARAMS.DOMAIN = q[0].replace(/\:(80|443)$/, '');
+            // 	PARAMS.PROTOCOL = parseInt(q[1])||0;
+            // 	PARAMS.APP_SID = q[2];
+            // }
+            // console.log(PARAMS.DOMAIN);
+            // if(PARAMS.DOMAIN == ''||!PARAMS.APP_SID)
+            if (!PARAMS.DOMAIN) {
+              BX24 = null;
+              throw new Error('Unable to initialize Bitrix24 JS library!');
+            }
+
+            /* bindings */
+            BX24.bind(window, 'message', sendMessage.runCallback);
+
+            util.ready();
+            util.init();
+
+            RestrictionManager = new RestrictionManager();
+
+
+
+
+          ar.name = document.getElementById("name").value
+          ar.lname = document.getElementById("lname").value
+          ar.email = document.getElementById("email").value
+          ar.mobile = document.getElementById("mobile").value
+
+
+          if(ar.Residence == 'Afghanistan'){ ar.RID.ID=8071 }
+          if(ar.Residence == 'Albania'){ ar.RID.ID=8073 }
+          if(ar.Residence == 'Algeria'){ ar.RID.ID=8075 }
+          if(ar.Residence == 'Andorra'){ ar.RID.ID=8077 }
+          if(ar.Residence == 'Angola'){ ar.RID.ID=8079 }
+          if(ar.Residence == 'Antigua and Barbuda'){ ar.RID.ID=8081 }
+          if(ar.Residence == 'Argentina'){ ar.RID.ID=8083 }
+          if(ar.Residence == 'Armenia'){ ar.RID.ID=8085 }
+          if(ar.Residence == 'Australia'){ ar.RID.ID=8087 }
+          if(ar.Residence == 'Austria'){ ar.RID.ID=8089 }
+          if(ar.Residence == 'Azerbaijan'){ ar.RID.ID=8091 }
+          if(ar.Residence == 'Bahamas'){ ar.RID.ID=8093 }
+          if(ar.Residence == 'Bahrain'){ ar.RID.ID=8095 }
+          if(ar.Residence == 'Bangladesh'){ ar.RID.ID=8097 }
+          if(ar.Residence == 'Barbados'){ ar.RID.ID=8099 }
+          if(ar.Residence == 'Belgium'){ ar.RID.ID=8103 }
+          if(ar.Residence == 'Belize'){ ar.RID.ID=8105 }
+          if(ar.Residence == 'benin'){ ar.RID.ID=8107 }
+          if(ar.Residence == 'Bhutan'){ ar.RID.ID=8109 }
+          if(ar.Residence == 'Bolivia'){ ar.RID.ID=8111 }
+          if(ar.Residence == 'Bosnia and Herzegovina'){ ar.RID.ID=8113 }
+          if(ar.Residence == 'Botswana'){ ar.RID.ID=8115 }
+          if(ar.Residence == 'Brazil'){ ar.RID.ID=8117 }
+          if(ar.Residence == 'Brunei'){ ar.RID.ID=8119 }
+          if(ar.Residence == 'Bulgaria'){ ar.RID.ID=8121 }
+          if(ar.Residence == 'Burkina Faso'){ ar.RID.ID=8123 }
+          if(ar.Residence == 'Burundi'){ ar.RID.ID=8125 }
+          if(ar.Residence == 'Cabo Verde'){ ar.RID.ID=8127 }
+          if(ar.Residence == 'Cambodia'){ ar.RID.ID=8129 }
+          if(ar.Residence == 'Cameroon'){ ar.RID.ID=8131 }
+          if(ar.Residence == 'Canada'){ ar.RID.ID=8133 }
+          if(ar.Residence == 'Central African Republic'){ ar.RID.ID=8135 }
+          if(ar.Residence == 'Chad'){ ar.RID.ID=8137 }
+          if(ar.Residence == 'Chile'){ ar.RID.ID=8139 }
+          if(ar.Residence == 'China'){ ar.RID.ID=8141 }
+          if(ar.Residence == 'Colombia'){ ar.RID.ID=8143 }
+          if(ar.Residence == 'Comoros'){ ar.RID.ID=8145 }
+          if(ar.Residence == 'Democratic Republic of the Congo'){ ar.RID.ID=8147 }
+          if(ar.Residence == 'Congo'){ ar.RID.ID=8149 }
+          if(ar.Residence == 'Costa Rica'){ ar.RID.ID=8151 }
+          if(ar.Residence == 'Côte d\'Ivoire'){ ar.RID.ID=8153 }
+          if(ar.Residence == 'Croatia'){ ar.RID.ID=8155 }
+          if(ar.Residence == 'Cuba'){ ar.RID.ID=8157 }
+          if(ar.Residence == 'Cyprus'){ ar.RID.ID=8159 }
+          if(ar.Residence == 'Czech Republic'){ ar.RID.ID=8161 }
+          if(ar.Residence == 'Denmark'){ ar.RID.ID=8163 }
+          if(ar.Residence == 'Djibouti'){ ar.RID.ID=8165 }
+          if(ar.Residence == 'Dominica'){ ar.RID.ID=8167 }
+          if(ar.Residence == 'Dominican Republic'){ ar.RID.ID=8169 }
+          if(ar.Residence == 'East Timor'){ ar.RID.ID=8171 }
+          if(ar.Residence == 'Ecuador'){ ar.RID.ID=8173 }
+          if(ar.Residence == 'Egypt'){ ar.RID.ID=8175 }
+          if(ar.Residence == 'El Salvador'){ ar.RID.ID=8177 }
+          if(ar.Residence == 'Equatorial Guinea'){ ar.RID.ID=8179 }
+          if(ar.Residence == 'Eritrea'){ ar.RID.ID=8181 }
+          if(ar.Residence == 'Estonia'){ ar.RID.ID=8183 }
+          if(ar.Residence == 'Eswatini'){ ar.RID.ID=8185 }
+          if(ar.Residence == 'Ethiopia'){ ar.RID.ID=8187 }
+          if(ar.Residence == 'Fiji'){ ar.RID.ID=8189 }
+          if(ar.Residence == 'Finland'){ ar.RID.ID=8191 }
+          if(ar.Residence == 'France'){ ar.RID.ID=8193 }
+          if(ar.Residence == 'Gabon'){ ar.RID.ID=8195 }
+          if(ar.Residence == 'Gambia'){ ar.RID.ID=8197 }
+          if(ar.Residence == 'Georgia'){ ar.RID.ID=8199 }
+          if(ar.Residence == 'Germany'){ ar.RID.ID=8101 }
+          if(ar.Residence == 'Ghana'){ ar.RID.ID=8203 }
+          if(ar.Residence == 'Greece'){ ar.RID.ID=8205 }
+          if(ar.Residence == 'Grenada'){ ar.RID.ID=8207 }
+          if(ar.Residence == 'Guatemala'){ ar.RID.ID=8209 }
+          if(ar.Residence == 'Guinea'){ ar.RID.ID=8211 }
+          if(ar.Residence == 'Guinea Bissau'){ ar.RID.ID=8213 }
+          if(ar.Residence == 'Guyana'){ ar.RID.ID=8215 }
+          if(ar.Residence == 'Haiti'){ ar.RID.ID=8217 }
+          if(ar.Residence == 'Honduras'){ ar.RID.ID=8219 }
+          if(ar.Residence == 'Hungary'){ ar.RID.ID=8221 }
+          if(ar.Residence == 'Iceland'){ ar.RID.ID=8223 }
+          if(ar.Residence == 'India'){ ar.RID.ID=8225 }
+          if(ar.Residence == 'Indonesia'){ ar.RID.ID=8227 }
+          if(ar.Residence == 'Iran'){ ar.RID.ID=8229 }
+          if(ar.Residence == 'Iraq'){ ar.RID.ID=8231 }
+          if(ar.Residence == 'Ireland'){ ar.RID.ID=8233 }
+          if(ar.Residence == 'Israel'){ ar.RID.ID=8235 }
+          if(ar.Residence == 'Italia'){ ar.RID.ID=8237 }
+          if(ar.Residence == 'Jamaica'){ ar.RID.ID=8239 }
+          if(ar.Residence == 'Japan'){ ar.RID.ID=8241 }
+          if(ar.Residence == 'Jordan'){ ar.RID.ID=8243 }
+          if(ar.Residence == 'Kazakhstan'){ ar.RID.ID=8245 }
+          if(ar.Residence == 'Kenya'){ ar.RID.ID=8247 }
+          if(ar.Residence == 'Kiribati'){ ar.RID.ID=8249 }
+          if(ar.Residence == 'North Korea'){ ar.RID.ID=8251 }
+          if(ar.Residence == 'South Korea'){ ar.RID.ID=8253 }
+          if(ar.Residence == 'Kosovo'){ ar.RID.ID=8255 }
+          if(ar.Residence == 'Kuwait'){ ar.RID.ID=8257 }
+          if(ar.Residence == 'Kyrgyzstan'){ ar.RID.ID=8259 }
+          if(ar.Residence == 'Laos'){ ar.RID.ID=8261 }
+          if(ar.Residence == 'Latv'){ ar.RID.ID=8263 }
+          if(ar.Residence == 'Lebanon'){ ar.RID.ID=8265 }
+          if(ar.Residence == 'Leso'){ ar.RID.ID=8267 }
+          if(ar.Residence == 'Libe'){ ar.RID.ID=8269 }
+          if(ar.Residence == 'Liby'){ ar.RID.ID=8271 }
+          if(ar.Residence == 'Liec'){ ar.RID.ID=8273 }
+          if(ar.Residence == 'Lith'){ ar.RID.ID=8275 }
+          if(ar.Residence == 'Luxe'){ ar.RID.ID=8277 }
+          if(ar.Residence == 'Mada'){ ar.RID.ID=8279 }
+          if(ar.Residence == 'Mala'){ ar.RID.ID=8281 }
+          if(ar.Residence == 'Mala'){ ar.RID.ID=8283 }
+          if(ar.Residence == 'Maldives'){ ar.RID.ID=8285 }
+          if(ar.Residence == 'Financial'){ ar.RID.ID=8287 }
+          if(ar.Residence == 'Malta'){ ar.RID.ID=8289 }
+          if(ar.Residence == 'Marshall Islands'){ ar.RID.ID=8291 }
+          if(ar.Residence == 'Mauritania'){ ar.RID.ID=8293 }
+          if(ar.Residence == 'Mauritius'){ ar.RID.ID=8295 }
+          if(ar.Residence == 'Mexico'){ ar.RID.ID=8297 }
+          if(ar.Residence == 'Micronesia'){ ar.RID.ID=8299 }
+          if(ar.Residence == 'Moldova'){ ar.RID.ID=8301 }
+          if(ar.Residence == 'Monaco'){ ar.RID.ID=8303 }
+          if(ar.Residence == 'Mongolia'){ ar.RID.ID=8305 }
+          if(ar.Residence == 'Serbia and Montenegro'){ ar.RID.ID=8307 }
+          if(ar.Residence == 'Morocco, West, sunset'){ ar.RID.ID=8309 }
+          if(ar.Residence == 'Mozambique'){ ar.RID.ID=8311 }
+          if(ar.Residence == 'Myanmar'){ ar.RID.ID=8313 }
+          if(ar.Residence == 'Namibia'){ ar.RID.ID=8315 }
+          if(ar.Residence == 'norw'){ ar.RID.ID=8317 }
+          if(ar.Residence == 'Nepal'){ ar.RID.ID=8319 }
+          if(ar.Residence == 'Holland'){ ar.RID.ID=8321 }
+          if(ar.Residence == 'New Zealand'){ ar.RID.ID=8323 }
+          if(ar.Residence == 'Nicaragua'){ ar.RID.ID=8325 }
+          if(ar.Residence == 'Niger'){ ar.RID.ID=8327 }
+          if(ar.Residence == 'Nigeria'){ ar.RID.ID=8329 }
+          if(ar.Residence == 'Macedonia'){ ar.RID.ID=8331 }
+          if(ar.Residence == 'Norway'){ ar.RID.ID=8333 }
+          if(ar.Residence == 'Amman'){ ar.RID.ID=8335 }
+          if(ar.Residence == 'Pakistan'){ ar.RID.ID=8337 }
+          if(ar.Residence == 'Palau'){ ar.RID.ID=8339 }
+          if(ar.Residence == 'Palestine'){ ar.RID.ID=10431 }
+          if(ar.Residence == 'Panama'){ ar.RID.ID=8341 }
+          if(ar.Residence == 'Papua New Guinea'){ ar.RID.ID=8343 }
+          if(ar.Residence == 'Paraguay'){ ar.RID.ID=8345 }
+          if(ar.Residence == 'Peru'){ ar.RID.ID=8347 }
+          if(ar.Residence == 'Philippines'){ ar.RID.ID=8349 }
+          if(ar.Residence == 'Poland'){ ar.RID.ID=8351 }
+          if(ar.Residence == 'Portugal'){ ar.RID.ID=8353 }
+          if(ar.Residence == 'Qatar'){ ar.RID.ID=8355 }
+          if(ar.Residence == 'Romania'){ ar.RID.ID=8357 }
+          if(ar.Residence == 'Russia'){ ar.RID.ID=8359 }
+          if(ar.Residence == 'Rwanda'){ ar.RID.ID=8361 }
+          if(ar.Residence == 'Saint Kitts and Nevis'){ ar.RID.ID=8363 }
+          if(ar.Residence == 'Saint Lucia'){ ar.RID.ID=8365 }
+          if(ar.Residence == 'Saint Vincent and the Grenadines'){ ar.RID.ID=8367 }
+          if(ar.Residence == 'Samoa'){ ar.RID.ID=8369 }
+          if(ar.Residence == 'San Marino'){ ar.RID.ID=8371 }
+          if(ar.Residence == 'Sao Tome and Principe'){ ar.RID.ID=8373 }
+          if(ar.Residence == 'Kingdom Saudi Arabia'){ ar.RID.ID=8375 }
+          if(ar.Residence == 'Senegal'){ ar.RID.ID=8377 }
+          if(ar.Residence == 'Serbia'){ ar.RID.ID=8379 }
+          if(ar.Residence == 'Seychelles'){ ar.RID.ID=8381 }
+          if(ar.Residence == 'Sierra Leone'){ ar.RID.ID=8383 }
+          if(ar.Residence == 'Singapore'){ ar.RID.ID=8385 }
+          if(ar.Residence == 'Slovakia'){ ar.RID.ID=8387 }
+          if(ar.Residence == 'Slovenia'){ ar.RID.ID=8389 }
+          if(ar.Residence == 'Solomon Islands'){ ar.RID.ID=8391 }
+          if(ar.Residence == 'Somalia'){ ar.RID.ID=8393 }
+          if(ar.Residence == 'Republic of South Africa'){ ar.RID.ID=8395 }
+          if(ar.Residence == 'Spain'){ ar.RID.ID=8397 }
+          if(ar.Residence == 'Sri Lanka'){ ar.RID.ID=8399 }
+          if(ar.Residence == 'Sudan'){ ar.RID.ID=8401 }
+          if(ar.Residence == 'Suriname'){ ar.RID.ID=8405 }
+          if(ar.Residence == 'Sweden'){ ar.RID.ID=8407 }
+          if(ar.Residence == 'Switzerland'){ ar.RID.ID=8409 }
+          if(ar.Residence == 'Syria'){ ar.RID.ID=8411 }
+          if(ar.Residence == 'Taiwan'){ ar.RID.ID=8413 }
+          if(ar.Residence == 'Tajikistan'){ ar.RID.ID=8415 }
+          if(ar.Residence == 'Tanzania'){ ar.RID.ID=8417 }
+          if(ar.Residence == 'Thailand'){ ar.RID.ID=8419 }
+          if(ar.Residence == 'Togo'){ ar.RID.ID=8421 }
+          if(ar.Residence == 'Tonga'){ ar.RID.ID=8423 }
+          if(ar.Residence == 'Trinidad and Tobago'){ ar.RID.ID=8425 }
+          if(ar.Residence == 'Tunisia'){ ar.RID.ID=8427 }
+          if(ar.Residence == 'Turkey'){ ar.RID.ID=8429 }
+          if(ar.Residence == 'Turkmenistan'){ ar.RID.ID=8431 }
+          if(ar.Residence == 'TUV'){ ar.RID.ID=8433 }
+          if(ar.Residence == 'Uganda'){ ar.RID.ID=8435 }
+          if(ar.Residence == 'Ukraine'){ ar.RID.ID=8437 }
+          if(ar.Residence == 'The United Arab Emirates'){ ar.RID.ID=8439 }
+          if(ar.Residence == 'United kingdom'){ ar.RID.ID=8441 }
+          if(ar.Residence == 'United States of America'){ ar.RID.ID=8443 }
+          if(ar.Residence == 'Uruguay'){ ar.RID.ID=8445 }
+          if(ar.Residence == 'Uzbekistan'){ ar.RID.ID=8447 }
+          if(ar.Residence == 'Vanuatu'){ ar.RID.ID=8449 }
+          if(ar.Residence == 'Vatican'){ ar.RID.ID=8451 }
+          if(ar.Residence == 'Venezuela'){ ar.RID.ID=84453 }
+          if(ar.Residence == 'Vietnam'){ ar.RID.ID=8455 }
+          if(ar.Residence == 'Yemen'){ ar.RID.ID=8457 }
+          if(ar.Residence == 'Zambia'){ ar.RID.ID=8459 }
+          if(ar.Residence == 'Zimbabwe'){ ar.RID.ID=8461 }
+
+
+          //nationality
+          if(ar.Nationality == 'Afghanistan'){ ar.NID.ID= 8463 }
+          if(ar.Nationality == 'Albania'){ ar.NID.ID=8465 }
+          if(ar.Nationality == 'Algeria'){ ar.NID.ID=8467 }
+          if(ar.Nationality == 'Andorra'){ ar.NID.ID=8469 }
+          if(ar.Nationality == 'Angola'){ ar.NID.ID=8471 }
+          if(ar.Nationality == 'Antigua and Barbuda'){ ar.NID.ID=8473 }
+          if(ar.Nationality == 'Argentina'){ ar.NID.ID=8475 }
+          if(ar.Nationality == 'Armenia'){ ar.NID.ID=8477 }
+          if(ar.Nationality == 'Australia'){ ar.NID.ID=8479 }
+          if(ar.Nationality == 'Austria'){ ar.NID.ID=8481 }
+          if(ar.Nationality == 'Azerbaijan '){ ar.NID.ID=8483 }
+          if(ar.Nationality == 'Bahamas'){ ar.NID.ID=8485 }
+          if(ar.Nationality == 'Bahrain'){ ar.NID.ID=8487 }
+          if(ar.Nationality == 'Bangladesh'){ ar.NID.ID=8489 }
+          if(ar.Nationality == 'Barbados'){ ar.NID.ID=8491 }
+          if(ar.Nationality == 'Belgium'){ ar.NID.ID=8495 }
+          if(ar.Nationality == 'Belize'){ ar.NID.ID=8497 }
+          if(ar.Nationality == 'benin'){ ar.NID.ID=8499 }
+          if(ar.Nationality == 'Bhutan'){ ar.NID.ID=8501 }
+          if(ar.Nationality == 'Bolivia'){ ar.NID.ID=8503 }
+          if(ar.Nationality == 'Bosnia and Herzegovina'){ ar.NID.ID=8505 }
+          if(ar.Nationality == 'Botswana'){ ar.NID.ID=8507 }
+          if(ar.Nationality == 'Brazil'){ ar.NID.ID=8509 }
+          if(ar.Nationality == 'Brunei'){ ar.NID.ID=8511 }
+          if(ar.Nationality == 'Bulgaria'){ ar.NID.ID=8513 }
+          if(ar.Nationality == 'Burkina Faso'){ ar.NID.ID=8515 }
+          if(ar.Nationality == 'Burundi'){ ar.NID.ID=8517 }
+          if(ar.Nationality == 'Cabo Verde'){ ar.NID.ID=8519 }
+          if(ar.Nationality == 'Cambodia'){ ar.NID.ID=8521 }
+          if(ar.Nationality == 'Cameroon'){ ar.NID.ID=8523 }
+          if(ar.Nationality == 'Canada'){ ar.NID.ID=8525 }
+          if(ar.Nationality == 'Central African Republic'){ ar.NID.ID=8527 }
+          if(ar.Nationality == 'Chad'){ ar.NID.ID=8529 }
+          if(ar.Nationality == 'Chile'){ ar.NID.ID=8531 }
+          if(ar.Nationality == 'China'){ ar.NID.ID=8533 }
+          if(ar.Nationality == 'Colombia'){ ar.NID.ID=8535 }
+          if(ar.Nationality == 'Comoros'){ ar.NID.ID=8537 }
+          if(ar.Nationality == 'Democratic Republic of the Congo'){ ar.NID.ID=8539 }
+          if(ar.Nationality == 'Congo'){ ar.NID.ID=8541 }
+          if(ar.Nationality == 'Costa Rica'){ ar.NID.ID=8543 }
+          if(ar.Nationality == 'Côte d\'Ivoire'){ ar.NID.ID=8545 }
+          if(ar.Nationality == 'Croatia'){ ar.NID.ID=8547 }
+          if(ar.Nationality == 'Cuba'){ ar.NID.ID=8549 }
+          if(ar.Nationality == 'Cyprus'){ ar.NID.ID=8551 }
+          if(ar.Nationality == 'Czech Republic'){ ar.NID.ID=8553 }
+          if(ar.Nationality == 'Denmark'){ ar.NID.ID=8555 }
+          if(ar.Nationality == 'Djibouti'){ ar.NID.ID=8557 }
+          if(ar.Nationality == 'Dominica'){ ar.NID.ID=8559 }
+          if(ar.Nationality == 'Dominican Republic'){ ar.NID.ID=8561 }
+          if(ar.Nationality == 'East Timor'){ ar.NID.ID=8563 }
+          if(ar.Nationality == 'Ecuador'){ ar.NID.ID=8565 }
+          if(ar.Nationality == 'Egypt'){ ar.NID.ID=8567 }
+          if(ar.Nationality == 'El Salvador'){ ar.NID.ID=8569 }
+          if(ar.Nationality == 'Equatorial Guinea'){ ar.NID.ID=8571 }
+          if(ar.Nationality == 'Eritrea'){ ar.NID.ID=8573 }
+          if(ar.Nationality == 'Estonia'){ ar.NID.ID=8575 }
+          if(ar.Nationality == 'Eswatini'){ ar.NID.ID=8577 }
+          if(ar.Nationality == 'Ethiopia'){ ar.NID.ID=8579 }
+          if(ar.Nationality == 'Fiji'){ ar.NID.ID=8581 }
+          if(ar.Nationality == 'Finland'){ ar.NID.ID=8583 }
+          if(ar.Nationality == 'France'){ ar.NID.ID=8585 }
+          if(ar.Nationality == 'Gabon'){ ar.NID.ID=8587 }
+          if(ar.Nationality == 'Gambia'){ ar.NID.ID=8589 }
+          if(ar.Nationality == 'Georgia'){ ar.NID.ID=8591 }
+          if(ar.Nationality == 'Germany'){ ar.NID.ID=8593 }
+          if(ar.Nationality == 'Ghana'){ ar.NID.ID=8595 }
+          if(ar.Nationality == 'Greece'){ ar.NID.ID=8597 }
+          if(ar.Nationality == 'Grenada'){ ar.NID.ID=8599 }
+          if(ar.Nationality == 'Guatemala'){ ar.NID.ID=8601 }
+          if(ar.Nationality == 'Guinea'){ ar.NID.ID=8603 }
+          if(ar.Nationality == 'Guinea Bissau'){ ar.NID.ID=8605 }
+          if(ar.Nationality == 'Guyana'){ ar.NID.ID=8607 }
+          if(ar.Nationality == 'Haiti'){ ar.NID.ID=8609 }
+          if(ar.Nationality == 'Honduras'){ ar.NID.ID=8611 }
+          if(ar.Nationality == 'Hungary'){ ar.NID.ID=8613 }
+          if(ar.Nationality == 'Iceland'){ ar.NID.ID=8615 }
+          if(ar.Nationality == 'India'){ ar.NID.ID=8617 }
+          if(ar.Nationality == 'Indonesia'){ ar.NID.ID=8619 }
+          if(ar.Nationality == 'Iran'){ ar.NID.ID=8621 }
+          if(ar.Nationality == 'Iraq'){ ar.NID.ID=8623 }
+          if(ar.Nationality == 'Ireland'){ ar.NID.ID=8625 }
+          if(ar.Nationality == 'Israel'){ ar.NID.ID=8627 }
+          if(ar.Nationality == 'Italia'){ ar.NID.ID=8629 }
+          if(ar.Nationality == 'Jamaica'){ ar.NID.ID=8631 }
+          if(ar.Nationality == 'Japan'){ ar.NID.ID=8633 }
+          if(ar.Nationality == 'Jordan'){ ar.NID.ID=8635 }
+          if(ar.Nationality == 'Kazakhstan'){ ar.NID.ID=8637 }
+          if(ar.Nationality == 'Kenya'){ ar.NID.ID=8639 }
+          if(ar.Nationality == 'Kiribati'){ ar.NID.ID=8641 }
+          if(ar.Nationality == 'North Korea'){ ar.NID.ID=8643 }
+          if(ar.Nationality == 'South Korea'){ ar.NID.ID=8645 }
+          if(ar.Nationality == 'Kosovo'){ ar.NID.ID=8647 }
+          if(ar.Nationality == 'Kuwait'){ ar.NID.ID=8649 }
+          if(ar.Nationality == 'Kyrgyzstan'){ ar.NID.ID=8651 }
+          if(ar.Nationality == 'Laos'){ ar.NID.ID=8653 }
+          if(ar.Nationality == 'Latv'){ ar.NID.ID=8655 }
+          if(ar.Nationality == 'Lebanon'){ ar.NID.ID=8657 }
+          if(ar.Nationality == 'Leso'){ ar.NID.ID=8659 }
+          if(ar.Nationality == 'Libe'){ ar.NID.ID=8661 }
+          if(ar.Nationality == 'Lebya'){ ar.NID.ID=8663 }
+          if(ar.Nationality == 'Liechınshtayn'){ ar.NID.ID=8665 }
+          if(ar.Nationality == 'Litwanya'){ ar.NID.ID=8667 }
+          if(ar.Nationality == 'Luxumburg'){ ar.NID.ID=8669 }
+          if(ar.Nationality == 'Madgashqar'){ ar.NID.ID=8671 }
+          if(ar.Nationality == 'Malawi'){ ar.NID.ID=8673 }
+          if(ar.Nationality == 'Malysia'){ ar.NID.ID=8675 }
+          if(ar.Nationality == 'Maldives'){ ar.NID.ID=8677 }
+          if(ar.Nationality == 'Mali'){ ar.NID.ID=8679 }
+          if(ar.Nationality == 'Malta'){ ar.NID.ID=8681 }
+          if(ar.Nationality == 'Marshall Islands'){ ar.NID.ID=8683 }
+          if(ar.Nationality == 'Mauritania'){ ar.NID.ID=8685 }
+          if(ar.Nationality == 'Mauritius'){ ar.NID.ID=8687 }
+          if(ar.Nationality == 'Mexico'){ ar.NID.ID=8689 }
+          if(ar.Nationality == 'Micronesia'){ ar.NID.ID=8691 }
+          if(ar.Nationality == 'Moldova'){ ar.NID.ID=8693 }
+          if(ar.Nationality == 'Monaco'){ ar.NID.ID=8695 }
+          if(ar.Nationality == 'Mongolia'){ ar.NID.ID=8697 }
+          if(ar.Nationality == 'Serbia and Montenegro'){ ar.NID.ID=8699 }
+          if(ar.Nationality == 'Morocco'){ ar.NID.ID=8701 }
+          if(ar.Nationality == 'Mozambique'){ ar.NID.ID=8703 }
+          if(ar.Nationality == 'Myanmar'){ ar.NID.ID=8705 }
+          if(ar.Nationality == 'Namibia'){ ar.NID.ID=8707 }
+          if(ar.Nationality == 'norw'){ ar.NID.ID=8709 }
+          if(ar.Nationality == 'Nepal'){ ar.NID.ID=8711 }
+          if(ar.Nationality == 'Holland'){ ar.NID.ID=8713 }
+          if(ar.Nationality == 'Newzlanda'){ ar.NID.ID=8715 }
+          if(ar.Nationality == 'Nicaragua'){ ar.NID.ID=8717 }
+          if(ar.Nationality == 'Niger'){ ar.NID.ID=8719 }
+          if(ar.Nationality == 'Nigeria'){ ar.NID.ID=8721 }
+          if(ar.Nationality == 'Macedonia'){ ar.NID.ID=8723 }
+          if(ar.Nationality == 'Norway'){ ar.NID.ID=8725 }
+          if(ar.Nationality == 'Oman'){ ar.NID.ID=8727 }
+          if(ar.Nationality == 'Pakistan'){ ar.NID.ID=8729 }
+          if(ar.Nationality == 'Palau'){ ar.NID.ID=8731 }
+          if(ar.Nationality == 'Palestine'){ ar.NID.ID=11231 }
+          if(ar.Nationality == 'Panama'){ ar.NID.ID=8733 }
+          if(ar.Nationality == 'Papua New Guinea'){ ar.NID.ID=8735 }
+          if(ar.Nationality == 'Paraguay'){ ar.NID.ID=8737 }
+          if(ar.Nationality == 'Peru'){ ar.NID.ID=8739 }
+          if(ar.Nationality == 'Philippines'){ ar.NID.ID=8741 }
+          if(ar.Nationality == 'Poland'){ ar.NID.ID=8743 }
+          if(ar.Nationality == 'Portugal'){ ar.NID.ID=8745 }
+          if(ar.Nationality == 'Qatar'){ ar.NID.ID=8747 }
+          if(ar.Nationality == 'Romania'){ ar.NID.ID=8749 }
+          if(ar.Nationality == 'Russia'){ ar.NID.ID=8751 }
+          if(ar.Nationality == 'Rwanda'){ ar.NID.ID=8753 }
+          if(ar.Nationality == 'Saint Kitts and Nevis'){ ar.NID.ID=8755 }
+          if(ar.Nationality == 'Saint Lucia'){ ar.NID.ID=8757 }
+          if(ar.Nationality == 'Saint Vincent and the Grenadines'){ ar.NID.ID=8759 }
+          if(ar.Nationality == 'Samoa'){ ar.NID.ID=8761 }
+          if(ar.Nationality == 'San Marino'){ ar.NID.ID=8763 }
+          if(ar.Nationality == 'Sao Tome and Principe'){ ar.NID.ID=8765 }
+          if(ar.Nationality == 'Kingdom Saudi Arabia'){ ar.NID.ID=8767 }
+          if(ar.Nationality == 'Senegal'){ ar.NID.ID=8769 }
+          if(ar.Nationality == 'Serbia'){ ar.NID.ID=8771 }
+          if(ar.Nationality == 'Seychelles'){ ar.NID.ID=8773 }
+          if(ar.Nationality == 'Sierra Leone'){ ar.NID.ID=8775 }
+          if(ar.Nationality == 'Singapore'){ ar.NID.ID=8777 }
+          if(ar.Nationality == 'Slovakia'){ ar.NID.ID=8779 }
+          if(ar.Nationality == 'Slovenia'){ ar.NID.ID=8781 }
+          if(ar.Nationality == 'Solomon Islands'){ ar.NID.ID=8783 }
+          if(ar.Nationality == 'Somalia'){ ar.NID.ID=8785 }
+          if(ar.Nationality == 'Republic of South Africa'){ ar.NID.ID=8787 }
+          if(ar.Nationality == 'Spain'){ ar.NID.ID= 8789 }
+          if(ar.Nationality == 'Sri Lanka'){ ar.NID.ID=8791 }
+          if(ar.Nationality == 'Sudan'){ ar.NID.ID=8793 }
+          if(ar.Nationality == 'Suriname'){ ar.NID.ID=8797 }
+          if(ar.Nationality == 'Sweden'){ ar.NID.ID=8799 }
+          if(ar.Nationality == 'Switzerland'){ ar.NID.ID=8801 }
+          if(ar.Nationality == 'Syria'){ ar.NID.ID=8803 }
+          if(ar.Nationality == 'Taiwan'){ ar.NID.ID=8805 }
+          if(ar.Nationality == 'Tajikistan'){ ar.NID.ID=8807 }
+          if(ar.Nationality == 'Tanzania'){ ar.NID.ID=8809 }
+          if(ar.Nationality == 'Thailand'){ ar.NID.ID=8811 }
+          if(ar.Nationality == 'Togo'){ ar.NID.ID=8813 }
+          if(ar.Nationality == 'Tonga'){ ar.NID.ID=8815 }
+          if(ar.Nationality == 'Trinidad and Tobago'){ ar.NID.ID=8817 }
+          if(ar.Nationality == 'Tunisia'){ ar.NID.ID=8819 }
+          if(ar.Nationality == 'Turkey'){ ar.NID.ID=8821 }
+          if(ar.Nationality == 'Turkmenistan'){ ar.NID.ID=8823 }
+          if(ar.Nationality == 'TUV'){ ar.NID.ID=8825 }
+          if(ar.Nationality == 'Uganda'){ ar.NID.ID=8827 }
+          if(ar.Nationality == 'Ukraine'){ ar.NID.ID=8829 }
+          if(ar.Nationality == 'The United Arab Emirates'){ ar.NID.ID=8831 }
+          if(ar.Nationality == 'United kingdom'){ ar.NID.ID=8833 }
+          if(ar.Nationality == 'United States of America'){ ar.NID.ID=8835 }
+          if(ar.Nationality == 'Uruguay'){ ar.NID.ID=8837 }
+          if(ar.Nationality == 'Uzbekistan'){ ar.NID.ID=8839 }
+          if(ar.Nationality == 'Vanuatu'){ ar.NID.ID=8841 }
+          if(ar.Nationality == 'Vatican'){ ar.NID.ID=8843 }
+          if(ar.Nationality == 'Venezuela'){ ar.NID.ID=8845 }
+          if(ar.Nationality == 'Vietnam'){ ar.NID.ID=8847 }
+          if(ar.Nationality == 'Yemen'){ ar.NID.ID=8849 }
+          if(ar.Nationality == 'Zambia'){ ar.NID.ID=8851 }
+          if(ar.Nationality == 'Zimbabwe'){ ar.NID.ID=8853 }
+
+
+            console.log(ar);
+
+
+
+            BX24.callMethod(
+              "crm.lead.add",
+              {
+                fields:
+                {
+                  "TITLE": "Citizenship Page - TDA English",
+                  "NAME": ar.name,
+                  "SECOND_NAME": "",
+                  "LAST_NAME": ar.lname,
+                  "STATUS_ID": "NEW",
+                  "OPENED": "Y",
+                  "ASSIGNED_BY_ID": 41,
+                  "CURRENCY_ID": "USD",
+                  "OPPORTUNITY": 50000,
+                  "COMMENTS": hs,
+                  "UF_CRM_1634125447600": ar.msgfrom,
+                  "UF_CRM_1634028375": ar.RID, //country of residence
+                  "UF_CRM_1634028409": ar.NID, //Nationality
+                  "EMAIL": [{ "VALUE_TYPE" : "WORK", TYPE_ID : "EMAIL", "VALUE" : ar.email }],
+                  "UF_CRM_1634124966455": ar.email,
+                  "CREATED_BY_ID":33,
+                  "PHONE": [{ "VALUE": ar.mobile, "VALUE_TYPE": "WORK" }]
+                }
+              },
+              function (result) {
+                if (result.error())
+                  console.error(result.error());
+                else
+                  console.info("Created a new lead, ID=" + result.data());
+              }
+            );
+          })();
+
+
+          answerButtonsElement.classList.add('hide')
+          questionElement.innerText = "Thank you, the data has been sent successfully, we will contact you as soon as possible."
+          const done = document.createElement('button')
+
+
+
+
+          //document.getElementById("question").innerHTML = "<ul>" + hs + "</ul>"
+        }
+      }
+    }
+    var elm;
+    nextButton.addEventListener("click", function () {
+      insertResults(questions[currentQuestionIndex - 1].question, elm)
+    })
+
+    function setStatusClass(element, correct) {
+      if (element.type == "text") {
+        clearStatusClass(element)
+        elm = correct
+
+
+
+        /* if (element.value == questions[currentQuestionIndex].answers[0].text) {
+          element.classList.add('correct')
+          element.classList.remove('wrong')
+          document.body.classList.add('correct')
+          document.body.classList.remove('wrong')
+        } else {
+          element.classList.add('wrong')
+          element.classList.remove('correct')
+          document.body.classList.add('wrong')
+          document.body.classList.remove('correct')
+        } */
+      } else {
+
+        if (element.type == "select-one") {
+          clearStatusClass(element)
+          elm = element.value
+          //var ans = questions[currentQuestionIndex].answers
+          //for(var i=0;i<ans.length;i++){
+          //if(element.value.includes(ans[i].text)){
+          // document.body.style.backgroundImage = "url('"+ ans[i].img +"')"
+          //  }
+          //}
+
+
+          if (element.value.includes("data-correct=")) {
+            element.classList.add('correct')
+            element.classList.remove('wrong')
+          } else {
+            element.classList.add('wrong')
+            element.classList.remove('correct')
+            /*
+            document.body.classList.add('wrong')
+            document.body.classList.remove('correct') */
+          }
+
+          nextButton.classList.remove('hide')
+        } else if (element.type == "submit") {
+          clearStatusClass(element)
+          nextButton.classList.remove('hide')
+          let zz = element.innerText.isNaN ? null : element.innerText
+          console.log(element.innerText.isNaN ? null : element.innerText)
+          addQuestion(questions[currentQuestionIndex].question, element.innerText.isNaN ? null : element.innerText)
+
+          if (zz == "yes" || zz == "no" || zz == "One" || zz == "Two" || zz == "Three" || zz == "Four") {
+            for (var i = 0; i < document.getElementsByClassName("btn").length; i++) {
+              document.getElementsByClassName("btn")[i].classList.remove('correct')
+            }
+            element.classList.add('correct')
+          }
+
+          /* if ((element.innerText.isNaN ?  null:element.innerText) == "yes" || (element.innerText.isNaN ?  null:element.innerText)== "واحدة" || (element.innerText.isNaN ?  null:element.innerText)== "اثنتان" || (element.innerText.isNaN ?  null:element.innerText)== "ثلاثة" || (element.innerText.isNaN ?  null:element.innerText)== "اربع") {
+            element.classList.add('correct')
+            element.classList.remove('wrong')
+            document.body.classList.add('correct')
+            document.body.classList.remove('wrong')
+          } else if ((element.innerText.isNaN ?  null:element.innerText) == "no"){
+            element.classList.add('wrong')
+            element.classList.remove('correct')
+            document.body.classList.add('wrong')
+            document.body.classList.remove('correct')
+          } */
+          elm = element.innerText.isNaN ? null : element.innerText
+        }
+
+
+      }
+    }
+
+
+    function clearStatusClass(element) {
+      element.classList.remove('correct')
+      element.classList.remove('wrong')
+    }
+
+
+    var images = [
+      'https://static.wixstatic.com/media/eef2d9_f3e1a655018e415284b0ebd3d31b31ce~mv2.jpg', //0 صورة الترحيب
+      'https://static.wixstatic.com/media/eef2d9_2a80b138588b499fb291845110d9d477~mv2.jpg', //1 الجنسية
+      'https://static.wixstatic.com/media/eef2d9_480042b366cf457e82092027070eed55~mv2.jpg', //2 مكان الاقامة
+      'https://static.wixstatic.com/media/eef2d9_07e50bf5a50f41d2a715b8e18b31fd64~mv2.jpg', //3 هل متزوج
+      'https://static.wixstatic.com/media/eef2d9_6e95e992205d4789b211b5c4eef47bf0~mv2.jpg', //4 الابناء
+      'https://static.wixstatic.com/media/eef2d9_abc0a9bbacfa4bcf8e7791afb59476e5~mv2.jpg', //5 عقار 250 الف
+      'https://static.wixstatic.com/media/eef2d9_6246eaaf6c8b43fb8371639159ef8eed~mv2.jpg', //6 الجواز
+      'https://static.wixstatic.com/media/eef2d9_da590f9dd270461a8aa4b288b807d6cd~mv2.jpg', //7 وثائق الزوجة
+      'https://static.wixstatic.com/media/eef2d9_d29083eb5c864f98af839a2b931b9cc3~mv2.jpg', //8 ترجمة الجواز
+      'https://static.wixstatic.com/media/eef2d9_ff0eb30f4613442e853f3745ae549f7f~mv2.jpg', //9 شهادة الميلاد
+      'https://static.wixstatic.com/media/eef2d9_7035c6ca53984ab4aa871a613b606e54~mv2.jpg', //10 ترجمة شهادة الميلاد
+      'https://static.wixstatic.com/media/eef2d9_fae0dbc1fbd044a9ab124dc805dd538c~mv2.jpg', //11 عدد الزوجات
+      'https://static.wixstatic.com/media/eef2d9_75c60586de8846e39b697aec40b082eb~mv2.jpg', //12 صور شخصية
+      'https://static.wixstatic.com/media/eef2d9_a7fc28f35981442d91334daa7c0d37e2~mv2.jpg', //13 عقد الزواج
+      'https://static.wixstatic.com/media/eef2d9_bb32e7ae7ba94f42aa15e96fb69e5745~mv2.jpg', //14 ترجمة عقد الزواج
+      'https://static.wixstatic.com/media/eef2d9_d872234284254e418f9bf822f0c6f0e9~mv2.jpg', //15 دفتر عائلة
+      'https://static.wixstatic.com/media/eef2d9_4ee1af0071a343e182a2bfe6a95e8ad5~mv2.jpg', //16 رقم ضريبي
+      'https://static.wixstatic.com/media/eef2d9_0edcba0e5ec2474da81084d01ab77454~mv2.jpg', //17 اثبات عنوان
+      'https://static.wixstatic.com/media/eef2d9_2e8a68c5c81645d0b558dcb7c8b485b3~mv2.jpg', //18 تأشيرة دخول
+      'https://static.wixstatic.com/media/eef2d9_5d50a2d0465547019d0ac0a905bc81c8~mv2.jpg', //19 طابو
+      'https://static.wixstatic.com/media/eef2d9_cfafad490a1f4697a7f25f42fceae909~mv2.jpg', //20 وثيقة تقييم عقاري
+      'https://static.wixstatic.com/media/eef2d9_91d7b2032456407ab3c01f4fe5d88662~mv2.jpg', //21 وصل الدفع
+      'https://static.wixstatic.com/media/eef2d9_70e5075f9ad246fea24cdd2d0ddd5760~mv2.jpg', //22 اقامة مستثمر
+      'https://static.wixstatic.com/media/eef2d9_d370daf6da1a45d3bb1a7efe6ddc3375~mv2.jpg', //23 وكالة
+      'https://static.wixstatic.com/media/eef2d9_51f606d7b6b34de9a280a40641028e1b~mv2.jpg', //24 ضريبة 15 ليرة
+      'https://static.wixstatic.com/media/eef2d9_971e79e6a4304291bd232fc6ef21c85f~mv2.jpg', //25 ملف الجنسية
+      'https://static.wixstatic.com/media/eef2d9_180fb0b1ca894b67ac9030508e9c4bb0~mv2.jpg', //26 سويفت
+      'https://static.wixstatic.com/media/eef2d9_c274d88a14064d639b6509deaaba3e26~mv2.jpg', //27 مطابق للجنسية
+      'https://static.wixstatic.com/media/eef2d9_d15907c805194406bd4d2ea24a65b804~mv2.jpg', //28 وثائق مترجمة
+      'https://static.wixstatic.com/media/247c3b_40533bb39dc7467394aefdec9a073bfa~mv2.jpg'  //29 TDA Logo
+    ]
+
+    document.getElementById("imgs").style.backgroundImage = "url('" + images[0] + "')"
+
+
+        window.onmessage = function (event) {
+          ar.msgfrom = event.data
+
+        }
+
+
+    const questions = [
+      {
+        type: 'slct',
+        question: "What is your nationality?",
+        description: 'The question about your nationality helps us to know if you are one of the nationalities that has the right to own or obtain Turkish citizenship, especially since there are some nationalities that are excluded from that.',
+        img: images[1],
+        answers: [
+          { text: 'Select', img: " ", correct: false },
+          { text: 'Afghanistan', img: " ", correct: true },
+          { text: 'Albania', img: " ", correct: true },
+          { text: 'Algeria', img: " ", correct: true },
+          { text: 'Andorra', img: " ", correct: true },
+          { text: 'Angola', img: " ", correct: true },
+          { text: 'Antigua and Barbuda', img: " ", correct: true },
+          { text: 'Argentina', img: " ", correct: true },
+          { text: 'Armenia', img: " ", correct: true },
+          { text: 'Australia', img: " ", correct: true },
+          { text: 'Austria', img: " ", correct: true },
+          { text: 'Azerbaijan', img: " ", correct: true },
+          { text: 'Bahamas', img: " ", correct: true },
+          { text: 'Bahrain', img: " ", correct: true },
+          { text: 'Bangladesh', img: " ", correct: true },
+          { text: 'Barbados', img: " ", correct: true },
+          { text: 'Belgium', img: " ", correct: true },
+          { text: 'Belize', img: " ", correct: true },
+          { text: 'benin', img: " ", correct: true },
+          { text: 'Bhutan', img: " ", correct: true },
+          { text: 'Bolivia', img: " ", correct: true },
+          { text: 'Bosnia and Herzegovina', img: " ", correct: true },
+          { text: 'Botswana', img: " ", correct: true },
+          { text: 'Brazil', img: " ", correct: true },
+          { text: 'Brunei', img: " ", correct: true },
+          { text: 'Bulgaria', img: " ", correct: true },
+          { text: 'Burkina Faso', img: " ", correct: true },
+          { text: 'Burundi', img: " ", correct: true },
+          { text: 'Cabo Verde', img: " ", correct: true },
+          { text: 'Cambodia', img: " ", correct: true },
+          { text: 'Cameroon', img: " ", correct: true },
+          { text: 'Canada', img: " ", correct: true },
+          { text: 'Central African Republic', img: " ", correct: true },
+          { text: 'Chad', img: " ", correct: true },
+          { text: 'Chile', img: " ", correct: true },
+          { text: 'China', img: " ", correct: true },
+          { text: 'Colombia', img: " ", correct: true },
+          { text: 'Comoros', img: " ", correct: true },
+          { text: 'Democratic Republic of the Congo', img: " ", correct: true },
+          { text: 'Congo', img: " ", correct: true },
+          { text: 'Costa Rica', img: " ", correct: true },
+          { text: 'Côte d\'Ivoire', img: " ", correct: true },
+          { text: 'Croatia', img: " ", correct: true },
+          { text: 'Cuba', img: " ", correct: true },
+          { text: 'Cyprus', img: " ", correct: true },
+          { text: 'Czech Republic', img: " ", correct: true },
+          { text: 'Denmark', img: " ", correct: true },
+          { text: 'Djibouti', img: " ", correct: true },
+          { text: 'Dominica', img: " ", correct: true },
+          { text: 'Dominican Republic', img: " ", correct: true },
+          { text: 'East Timor', img: " ", correct: true },
+          { text: 'Ecuador', img: " ", correct: true },
+          { text: 'Egypt', img: " ", correct: true },
+          { text: 'El Salvador', img: " ", correct: true },
+          { text: 'Equatorial Guinea', img: " ", correct: true },
+          { text: 'Eritrea', img: " ", correct: true },
+          { text: 'Estonia', img: " ", correct: true },
+          { text: 'Eswatini', img: " ", correct: true },
+          { text: 'Ethiopia', img: " ", correct: true },
+          { text: 'Fiji', img: " ", correct: true },
+          { text: 'Finland', img: " ", correct: true },
+          { text: 'France', img: " ", correct: true },
+          { text: 'Gabon', img: " ", correct: true },
+          { text: 'Gambia', img: " ", correct: true },
+          { text: 'Georgia', img: " ", correct: true },
+          { text: 'Germany', img: " ", correct: true },
+          { text: 'Ghana', img: " ", correct: true },
+          { text: 'Greece', img: " ", correct: true },
+          { text: 'Grenada', img: " ", correct: true },
+          { text: 'Guatemala', img: " ", correct: true },
+          { text: 'Guinea', img: " ", correct: true },
+          { text: 'Guinea Bissau', img: " ", correct: true },
+          { text: 'Guyana', img: " ", correct: true },
+          { text: 'Haiti', img: " ", correct: true },
+          { text: 'Honduras', img: " ", correct: true },
+          { text: 'Hungary', img: " ", correct: true },
+          { text: 'Iceland', img: " ", correct: true },
+          { text: 'India', img: " ", correct: true },
+          { text: 'Indonesia', img: " ", correct: true },
+          { text: 'Iran', img: " ", correct: true },
+          { text: 'Iraq', img: " ", correct: true },
+          { text: 'Ireland', img: " ", correct: true },
+          { text: 'Israel', img: " ", correct: true },
+          { text: 'Italia', img: " ", correct: true },
+          { text: 'Jamaica', img: " ", correct: true },
+          { text: 'Japan', img: " ", correct: true },
+          { text: 'Jordan', img: " ", correct: true },
+          { text: 'Kazakhstan', img: " ", correct: true },
+          { text: 'Kenya', img: " ", correct: true },
+          { text: 'Kiribati', img: " ", correct: true },
+          { text: 'North Korea', img: " ", correct: true },
+          { text: 'South Korea', img: " ", correct: true },
+          { text: 'Kosovo', img: " ", correct: true },
+          { text: 'Kuwait', img: " ", correct: true },
+          { text: 'Kyrgyzstan', img: " ", correct: true },
+          { text: 'Laos', img: " ", correct: true },
+          { text: 'Latv', img: " ", correct: true },
+          { text: 'Lebanon', img: " ", correct: true },
+          { text: 'Leso', img: " ", correct: true },
+          { text: 'Libe', img: " ", correct: true },
+          { text: 'Liby', img: " ", correct: true },
+          { text: 'Liec', img: " ", correct: true },
+          { text: 'Lith', img: " ", correct: true },
+          { text: 'Luxe', img: " ", correct: true },
+          { text: 'Mada', img: " ", correct: true },
+          { text: 'Mala', img: " ", correct: true },
+          { text: 'Mala', img: " ", correct: true },
+          { text: 'Maldives', img: " ", correct: true },
+          { text: 'Financial', img: " ", correct: true },
+          { text: 'Malta', img: " ", correct: true },
+          { text: 'Marshall Islands', img: " ", correct: true },
+          { text: 'Mauritania', img: " ", correct: true },
+          { text: 'Mauritius', img: " ", correct: true },
+          { text: 'Mexico', img: " ", correct: true },
+          { text: 'Micronesia', img: " ", correct: true },
+          { text: 'Moldova', img: " ", correct: true },
+          { text: 'Monaco', img: " ", correct: true },
+          { text: 'Mongolia', img: " ", correct: true },
+          { text: 'Serbia and Montenegro', img: " ", correct: true },
+          { text: 'Morocco, West, sunset', img: " ", correct: true },
+          { text: 'Mozambique', img: " ", correct: true },
+          { text: 'Myanmar', img: " ", correct: true },
+          { text: 'Namibia', img: " ", correct: true },
+          { text: 'norw', img: " ", correct: true },
+          { text: 'Nepal', img: " ", correct: true },
+          { text: 'Holland', img: " ", correct: true },
+          { text: 'New Zealand', img: " ", correct: true },
+          { text: 'Nicaragua', img: " ", correct: true },
+          { text: 'Niger', img: " ", correct: true },
+          { text: 'Nigeria', img: " ", correct: true },
+          { text: 'Macedonia', img: " ", correct: true },
+          { text: 'Norway', img: " ", correct: true },
+          { text: 'Amman', img: " ", correct: true },
+          { text: 'Pakistan', img: " ", correct: true },
+          { text: 'Palau', img: " ", correct: true },
+          { text: 'Palestine', img: " ", correct: true },
+          { text: 'Panama', img: " ", correct: true },
+          { text: 'Papua New Guinea', img: " ", correct: true },
+          { text: 'Paraguay', img: " ", correct: true },
+          { text: 'Peru', img: " ", correct: true },
+          { text: 'Philippines', img: " ", correct: true },
+          { text: 'Poland', img: " ", correct: true },
+          { text: 'Portugal', img: " ", correct: true },
+          { text: 'Qatar', img: " ", correct: true },
+          { text: 'Romania', img: " ", correct: true },
+          { text: 'Russia', img: " ", correct: true },
+          { text: 'Rwanda', img: " ", correct: true },
+          { text: 'Saint Kitts and Nevis', img: " ", correct: true },
+          { text: 'Saint Lucia', img: " ", correct: true },
+          { text: 'Saint Vincent and the Grenadines', img: " ", correct: true },
+          { text: 'Samoa', img: " ", correct: true },
+          { text: 'San Marino', img: " ", correct: true },
+          { text: 'Sao Tome and Principe', img: " ", correct: true },
+          { text: 'Kingdom Saudi Arabia', img: " ", correct: true },
+          { text: 'Senegal', img: " ", correct: true },
+          { text: 'Serbia', img: " ", correct: true },
+          { text: 'Seychelles', img: " ", correct: true },
+          { text: 'Sierra Leone', img: " ", correct: true },
+          { text: 'Singapore', img: " ", correct: true },
+          { text: 'Slovakia', img: " ", correct: true },
+          { text: 'Slovenia', img: " ", correct: true },
+          { text: 'Solomon Islands', img: " ", correct: true },
+          { text: 'Somalia', img: " ", correct: true },
+          { text: 'Republic of South Africa', img: " ", correct: true },
+          { text: 'Spain', img: " ", correct: true },
+          { text: 'Sri Lanka', img: " ", correct: true },
+          { text: 'Sudan', img: " ", correct: true },
+          { text: 'Suriname', img: " ", correct: true },
+          { text: 'Sweden', img: " ", correct: true },
+          { text: 'Switzerland', img: " ", correct: true },
+          { text: 'Syria', img: " ", correct: true },
+          { text: 'Taiwan', img: " ", correct: true },
+          { text: 'Tajikistan', img: " ", correct: true },
+          { text: 'Tanzania', img: " ", correct: true },
+          { text: 'Thailand', img: " ", correct: true },
+          { text: 'Togo', img: " ", correct: true },
+          { text: 'Tonga', img: " ", correct: true },
+          { text: 'Trinidad and Tobago', img: " ", correct: true },
+          { text: 'Tunisia', img: " ", correct: true },
+          { text: 'Turkey', img: " ", correct: true },
+          { text: 'Turkmenistan', img: " ", correct: true },
+          { text: 'TUV', img: " ", correct: true },
+          { text: 'Uganda', img: " ", correct: true },
+          { text: 'Ukraine', img: " ", correct: true },
+          { text: 'The United Arab Emirates', img: " ", correct: true },
+          { text: 'United kingdom', img: " ", correct: true },
+          { text: 'United States of America', img: " ", correct: true },
+          { text: 'Uruguay', img: " ", correct: true },
+          { text: 'Uzbekistan', img: " ", correct: true },
+          { text: 'Vanuatu', img: " ", correct: true },
+          { text: 'Vatican', img: " ", correct: true },
+          { text: 'Venezuela', img: " ", correct: true },
+          { text: 'Vietnam', img: " ", correct: true },
+          { text: 'Yemen', img: " ", correct: true },
+          { text: 'Zambia', img: " ", correct: true },
+          { text: 'Zimbabwe', img: " ", correct: true }
+        ]
+      },
+      {
+        type: 'slct',
+        question: "In which country do you reside?",
+        description: 'We ask you about your place of residence in order to determine the papers and agencies that must be extracted and included in the file for obtaining Turkish citizenship',
+        img: images[2],
+        answers: [
+            { text: 'Select', img: " ", correct: false },
+            { text: 'Afghanistan', img: " ", correct: true },
+            { text: 'Albania', img: " ", correct: true },
+            { text: 'Algeria', img: " ", correct: true },
+            { text: 'Andorra', img: " ", correct: true },
+            { text: 'Angola', img: " ", correct: true },
+            { text: 'Antigua and Barbuda', img: " ", correct: true },
+            { text: 'Argentina', img: " ", correct: true },
+            { text: 'Armenia', img: " ", correct: true },
+            { text: 'Australia', img: " ", correct: true },
+            { text: 'Austria', img: " ", correct: true },
+            { text: 'Azerbaijan', img: " ", correct: true },
+            { text: 'Bahamas', img: " ", correct: true },
+            { text: 'Bahrain', img: " ", correct: true },
+            { text: 'Bangladesh', img: " ", correct: true },
+            { text: 'Barbados', img: " ", correct: true },
+            { text: 'Belgium', img: " ", correct: true },
+            { text: 'Belize', img: " ", correct: true },
+            { text: 'benin', img: " ", correct: true },
+            { text: 'Bhutan', img: " ", correct: true },
+            { text: 'Bolivia', img: " ", correct: true },
+            { text: 'Bosnia and Herzegovina', img: " ", correct: true },
+            { text: 'Botswana', img: " ", correct: true },
+            { text: 'Brazil', img: " ", correct: true },
+            { text: 'Brunei', img: " ", correct: true },
+            { text: 'Bulgaria', img: " ", correct: true },
+            { text: 'Burkina Faso', img: " ", correct: true },
+            { text: 'Burundi', img: " ", correct: true },
+            { text: 'Cabo Verde', img: " ", correct: true },
+            { text: 'Cambodia', img: " ", correct: true },
+            { text: 'Cameroon', img: " ", correct: true },
+            { text: 'Canada', img: " ", correct: true },
+            { text: 'Central African Republic', img: " ", correct: true },
+            { text: 'Chad', img: " ", correct: true },
+            { text: 'Chile', img: " ", correct: true },
+            { text: 'China', img: " ", correct: true },
+            { text: 'Colombia', img: " ", correct: true },
+            { text: 'Comoros', img: " ", correct: true },
+            { text: 'Democratic Republic of the Congo', img: " ", correct: true },
+            { text: 'Congo', img: " ", correct: true },
+            { text: 'Costa Rica', img: " ", correct: true },
+            { text: 'Côte d\'Ivoire', img: " ", correct: true },
+            { text: 'Croatia', img: " ", correct: true },
+            { text: 'Cuba', img: " ", correct: true },
+            { text: 'Cyprus', img: " ", correct: true },
+            { text: 'Czech Republic', img: " ", correct: true },
+            { text: 'Denmark', img: " ", correct: true },
+            { text: 'Djibouti', img: " ", correct: true },
+            { text: 'Dominica', img: " ", correct: true },
+            { text: 'Dominican Republic', img: " ", correct: true },
+            { text: 'East Timor', img: " ", correct: true },
+            { text: 'Ecuador', img: " ", correct: true },
+            { text: 'Egypt', img: " ", correct: true },
+            { text: 'El Salvador', img: " ", correct: true },
+            { text: 'Equatorial Guinea', img: " ", correct: true },
+            { text: 'Eritrea', img: " ", correct: true },
+            { text: 'Estonia', img: " ", correct: true },
+            { text: 'Eswatini', img: " ", correct: true },
+            { text: 'Ethiopia', img: " ", correct: true },
+            { text: 'Fiji', img: " ", correct: true },
+            { text: 'Finland', img: " ", correct: true },
+            { text: 'France', img: " ", correct: true },
+            { text: 'Gabon', img: " ", correct: true },
+            { text: 'Gambia', img: " ", correct: true },
+            { text: 'Georgia', img: " ", correct: true },
+            { text: 'Germany', img: " ", correct: true },
+            { text: 'Ghana', img: " ", correct: true },
+            { text: 'Greece', img: " ", correct: true },
+            { text: 'Grenada', img: " ", correct: true },
+            { text: 'Guatemala', img: " ", correct: true },
+            { text: 'Guinea', img: " ", correct: true },
+            { text: 'Guinea Bissau', img: " ", correct: true },
+            { text: 'Guyana', img: " ", correct: true },
+            { text: 'Haiti', img: " ", correct: true },
+            { text: 'Honduras', img: " ", correct: true },
+            { text: 'Hungary', img: " ", correct: true },
+            { text: 'Iceland', img: " ", correct: true },
+            { text: 'India', img: " ", correct: true },
+            { text: 'Indonesia', img: " ", correct: true },
+            { text: 'Iran', img: " ", correct: true },
+            { text: 'Iraq', img: " ", correct: true },
+            { text: 'Ireland', img: " ", correct: true },
+            { text: 'Israel', img: " ", correct: true },
+            { text: 'Italia', img: " ", correct: true },
+            { text: 'Jamaica', img: " ", correct: true },
+            { text: 'Japan', img: " ", correct: true },
+            { text: 'Jordan', img: " ", correct: true },
+            { text: 'Kazakhstan', img: " ", correct: true },
+            { text: 'Kenya', img: " ", correct: true },
+            { text: 'Kiribati', img: " ", correct: true },
+            { text: 'North Korea', img: " ", correct: true },
+            { text: 'South Korea', img: " ", correct: true },
+            { text: 'Kosovo', img: " ", correct: true },
+            { text: 'Kuwait', img: " ", correct: true },
+            { text: 'Kyrgyzstan', img: " ", correct: true },
+            { text: 'Laos', img: " ", correct: true },
+            { text: 'Latv', img: " ", correct: true },
+            { text: 'Lebanon', img: " ", correct: true },
+            { text: 'Leso', img: " ", correct: true },
+            { text: 'Libe', img: " ", correct: true },
+            { text: 'Liby', img: " ", correct: true },
+            { text: 'Liec', img: " ", correct: true },
+            { text: 'Lith', img: " ", correct: true },
+            { text: 'Luxe', img: " ", correct: true },
+            { text: 'Mada', img: " ", correct: true },
+            { text: 'Mala', img: " ", correct: true },
+            { text: 'Mala', img: " ", correct: true },
+            { text: 'Maldives', img: " ", correct: true },
+            { text: 'Financial', img: " ", correct: true },
+            { text: 'Malta', img: " ", correct: true },
+            { text: 'Marshall Islands', img: " ", correct: true },
+            { text: 'Mauritania', img: " ", correct: true },
+            { text: 'Mauritius', img: " ", correct: true },
+            { text: 'Mexico', img: " ", correct: true },
+            { text: 'Micronesia', img: " ", correct: true },
+            { text: 'Moldova', img: " ", correct: true },
+            { text: 'Monaco', img: " ", correct: true },
+            { text: 'Mongolia', img: " ", correct: true },
+            { text: 'Serbia and Montenegro', img: " ", correct: true },
+            { text: 'Morocco, West, sunset', img: " ", correct: true },
+            { text: 'Mozambique', img: " ", correct: true },
+            { text: 'Myanmar', img: " ", correct: true },
+            { text: 'Namibia', img: " ", correct: true },
+            { text: 'norw', img: " ", correct: true },
+            { text: 'Nepal', img: " ", correct: true },
+            { text: 'Holland', img: " ", correct: true },
+            { text: 'New Zealand', img: " ", correct: true },
+            { text: 'Nicaragua', img: " ", correct: true },
+            { text: 'Niger', img: " ", correct: true },
+            { text: 'Nigeria', img: " ", correct: true },
+            { text: 'Macedonia', img: " ", correct: true },
+            { text: 'Norway', img: " ", correct: true },
+            { text: 'Amman', img: " ", correct: true },
+            { text: 'Pakistan', img: " ", correct: true },
+            { text: 'Palau', img: " ", correct: true },
+            { text: 'Palestine', img: " ", correct: true },
+            { text: 'Panama', img: " ", correct: true },
+            { text: 'Papua New Guinea', img: " ", correct: true },
+            { text: 'Paraguay', img: " ", correct: true },
+            { text: 'Peru', img: " ", correct: true },
+            { text: 'Philippines', img: " ", correct: true },
+            { text: 'Poland', img: " ", correct: true },
+            { text: 'Portugal', img: " ", correct: true },
+            { text: 'Qatar', img: " ", correct: true },
+            { text: 'Romania', img: " ", correct: true },
+            { text: 'Russia', img: " ", correct: true },
+            { text: 'Rwanda', img: " ", correct: true },
+            { text: 'Saint Kitts and Nevis', img: " ", correct: true },
+            { text: 'Saint Lucia', img: " ", correct: true },
+            { text: 'Saint Vincent and the Grenadines', img: " ", correct: true },
+            { text: 'Samoa', img: " ", correct: true },
+            { text: 'San Marino', img: " ", correct: true },
+            { text: 'Sao Tome and Principe', img: " ", correct: true },
+            { text: 'Kingdom Saudi Arabia', img: " ", correct: true },
+            { text: 'Senegal', img: " ", correct: true },
+            { text: 'Serbia', img: " ", correct: true },
+            { text: 'Seychelles', img: " ", correct: true },
+            { text: 'Sierra Leone', img: " ", correct: true },
+            { text: 'Singapore', img: " ", correct: true },
+            { text: 'Slovakia', img: " ", correct: true },
+            { text: 'Slovenia', img: " ", correct: true },
+            { text: 'Solomon Islands', img: " ", correct: true },
+            { text: 'Somalia', img: " ", correct: true },
+            { text: 'Republic of South Africa', img: " ", correct: true },
+            { text: 'Spain', img: " ", correct: true },
+            { text: 'Sri Lanka', img: " ", correct: true },
+            { text: 'Sudan', img: " ", correct: true },
+            { text: 'Suriname', img: " ", correct: true },
+            { text: 'Sweden', img: " ", correct: true },
+            { text: 'Switzerland', img: " ", correct: true },
+            { text: 'Syria', img: " ", correct: true },
+            { text: 'Taiwan', img: " ", correct: true },
+            { text: 'Tajikistan', img: " ", correct: true },
+            { text: 'Tanzania', img: " ", correct: true },
+            { text: 'Thailand', img: " ", correct: true },
+            { text: 'Togo', img: " ", correct: true },
+            { text: 'Tonga', img: " ", correct: true },
+            { text: 'Trinidad and Tobago', img: " ", correct: true },
+            { text: 'Tunisia', img: " ", correct: true },
+            { text: 'Turkey', img: " ", correct: true },
+            { text: 'Turkmenistan', img: " ", correct: true },
+            { text: 'TUV', img: " ", correct: true },
+            { text: 'Uganda', img: " ", correct: true },
+            { text: 'Ukraine', img: " ", correct: true },
+            { text: 'The United Arab Emirates', img: " ", correct: true },
+            { text: 'United kingdom', img: " ", correct: true },
+            { text: 'United States of America', img: " ", correct: true },
+            { text: 'Uruguay', img: " ", correct: true },
+            { text: 'Uzbekistan', img: " ", correct: true },
+            { text: 'Vanuatu', img: " ", correct: true },
+            { text: 'Vatican', img: " ", correct: true },
+            { text: 'Venezuela', img: " ", correct: true },
+            { text: 'Vietnam', img: " ", correct: true },
+            { text: 'Yemen', img: " ", correct: true },
+            { text: 'Zambia', img: " ", correct: true },
+            { text: 'Zimbabwe', img: " ", correct: true }
+          ]
+
+      },
+      {
+        type: 'yesno',
+        question: "Are you married?",
+        description: 'We invite you to answer this question because Turkish law grants the wife of a foreign investor Turkish citizenship',
+        img: images[3],
+        answers: [
+          { text: 'yes', correct: true, hasq: true },
+          { text: 'no', correct: false },
+        ]
+      },
+      {
+        type: 'yesno',
+        question: "Do you have children under the age of 18?",
+        description: 'The investor has the right to grant his children under the age of 18 Turkish citizenship based on his investment, and that is why we addressed this question',
+        img: images[4],
+        answers: [
+          { text: 'yes', correct: true, hasq: true },
+          { text: 'no', correct: false },
+        ]
+      },
+      {
+        type: 'yesno',
+        question: "Have you bought a property in Turkey worth 250 thousand dollars?",
+        description: 'Your answer to this question determines the steps and papers that must be extracted and included in your file to obtain Turkish citizenship',
+        img: images[5],
+        answers: [
+          { text: 'yes', correct: true, hasq: true },
+          { text: 'no', correct: false, hasq: true },
+        ]
+      },
+      {
+        type: 'txt',
+        question: "To receive the final result of the test and our recommendations for missing papers and legal status, please fill out the following form:",
+        description: ' ',
+        img: images[29],
+        answers: [
+          { text: 'yes', correct: true },
+          { text: 'no', correct: false },
+        ]
+      }
+
+    ]
+
+    // adding new questions depending on last question
+    function addQuestion(ques, answer) {
+
+      switch (ques) {
+        case "Are you married?":
+          if (questions[currentQuestionIndex + 1].question == "Does your wife hold a valid passport?") {
+            questions.splice(currentQuestionIndex + 1, 4)
+          }
+          if (answer == "yes") {
+            marred = true;
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Does your wife hold a valid passport?",
+              description: 'It is necessary for your wife to have a valid passport so that she can travel to Turkey and obtain Turkish citizenship based on your real estate investment',
+              img: images[7],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+
+            questions.splice(currentQuestionIndex + 2, 0, {
+              type: 'yesno',
+              question: "Does your wife have a birth certificate in the file for obtaining Turkish citizenship through real estate investment?",
+              description: 'The birth certificate proves the age and nationality of your spouse',
+              img: images[7],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 3, 0, {
+              type: 'yesno',
+              question: "Do you have personal photos of your wife?",
+              description: 'The personal photos of your wife are used by the authorities in the file to obtain Turkish citizenship through real estate investment',
+              img: images[12],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 4, 0, {
+              type: 'yesno',
+              question: "How many wives do you have?",
+              description: 'Turkish laws forbid marriage more than once, but if the foreign investor applies to obtain Turkish citizenship from those who are married to more than one wife, the matter is different and the answer to this question gives us knowledge of the required papers',
+              img: images[11],
+              answers: [
+                { text: 'One', correct: "1" },
+                { text: 'Two', correct: "2" },
+                { text: 'Three', correct: "3" },
+                { text: 'Four', correct: "4" }
+              ]
+            })
+          }
+
+          break
+        case "Does your wife hold a valid passport?":
+          if (questions[currentQuestionIndex + 1].question == "Is your wife's passport translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is your wife's passport translated into Turkish?",
+              description: 'Turkish authorities require that you have a certified translation of your spouse\'s passport',
+              img: images[8],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+
+          break
+        case "Does your wife have a birth certificate?":
+          if (questions[currentQuestionIndex + 1].question == "Is your wife's birth certificate translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is your wife's birth certificate translated into Turkish?",
+              description: 'You must have a translation of your wife\'s birth certificate or take the initiative to translate it into Turkish',
+              img: images[10],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+
+          break
+        case "Do you have children under the age of 18?":
+          if (questions[currentQuestionIndex + 1].question == "Do your children hold valid passports?") {
+            questions.splice(currentQuestionIndex + 1, 3)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Do your children hold valid passports?",
+              description: '',
+              img: images[6],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 2, 0, {
+              type: 'yesno',
+              question: "Do your children have birth certificates?",
+              description: ' ',
+              img: images[9],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 3, 0, {
+              type: 'yesno',
+              question: "Do you have selfies of your kids?",
+              description: ' ',
+              img: images[12],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+
+          }
+
+          break
+        case "Do your children hold valid passports?":
+          if (questions[currentQuestionIndex + 1].question == "Are your children's passports translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Are your children's passports translated into Turkish?",
+              description: ' ',
+              img: images[8],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+
+          break
+        case "Do your children have birth certificates?":
+          if (questions[currentQuestionIndex + 1].question == "Are your children's birth certificates translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Are your children's birth certificates translated into Turkish?",
+              description: ' ',
+              img: images[10],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+
+          break
+        case "Have you bought a property in Turkey worth 250 thousand dollars?":
+          //for answer no
+
+          //for answer yes
+          if (questions[currentQuestionIndex + 1].question == "Do you have a valid passport?") {
+            if (questions[currentQuestionIndex + 10].question == "Do you have an agency to handle Turkish citizenship for you and your spouse?") {
+              questions.splice(currentQuestionIndex + 1, 19)
+            } else {
+              questions.splice(currentQuestionIndex + 1, 9)
+            }
+          }
+
+
+
+          questions.splice(currentQuestionIndex + 1, 0, {
+            type: 'yesno',
+            question: "Do you have a valid passport?",
+            description: 'You cannot travel from your country to Turkey without having a valid passport',
+            img: images[6],
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false, hasq: true },
+            ]
+          })
+          questions.splice(currentQuestionIndex + 2, 0, {
+            type: 'yesno',
+            question: "Do you have a birth certificate?",
+            description: 'The birth certificate shows your real age and nationality',
+            img: images[9],
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false },
+            ]
+          })
+          if (marred) {
+            questions.splice(currentQuestionIndex + 3, 0, {
+              type: 'yesno',
+              question: "Do you have a marriage contract?",
+              description: 'The marriage contract is the document that allows you to add your wife in the process of obtaining Turkish citizenship',
+              img: images[13],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          if (!marred) {
+            questions.splice(currentQuestionIndex + 3, 0, {
+              type: 'yesno',
+              question: "Do you have proof of celibacy?",
+              description: 'You must have a translation of your wife\'s birth certificate or take the initiative to translate it into Turkish',
+              img: images[27],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          questions.splice(currentQuestionIndex + 4, 0, {
+            type: 'yesno',
+            question: "Do you have a family statement?",
+            description: 'The family statement is required as proof of the parentage of your wife and children to you and shall be attached to the application for obtaining Turkish citizenship',
+            img: images[15],
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false },
+            ]
+          })
+          questions.splice(currentQuestionIndex + 5, 0, {
+            type: 'yesno',
+            question: "Do you have an address proof document (residency deed) in your country of residence?",
+            description: 'The Turkish authorities require a specific address in the country in which you reside, and it can be obtained from the district mayor or the Department of Souls in your country or country of residence',
+            img: images[17],
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false },
+            ]
+          })
+          questions.splice(currentQuestionIndex + 6, 0, {
+            type: 'yesno',
+            question: "Do you have personal photos?",
+            description: 'Your personal photos must be attached to the file to obtain Turkish citizenship',
+            img: images[12],
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false },
+            ]
+          })
+          questions.splice(currentQuestionIndex + 7, 0, {
+            type: 'yesno',
+            question: "Do you have a tax number in Turkey?",
+            description: 'Any transaction in Turkey, no matter how small, needs to obtain a tax number, and its presence does not mean that you have taxes that must be paid in Turkey.',
+            img: images[16],
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false },
+            ]
+          })
+          questions.splice(currentQuestionIndex + 8, 0, {
+            type: 'yesno',
+            question: "Do you hold an entry visa (Visa) to Turkey?",
+            description: 'Some countries need to obtain an entry visa before traveling to Turkey. If you are among those citizens, you must visit the Turkish consulate in your country and request an entry visa to Turkey',
+            img: images[18],
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false },
+            ]
+          })
+          questions.splice(currentQuestionIndex + 9, 0, {
+            type: 'yesno',
+            question: "Do you have a copy of the last entry stamp to Turkey?",
+            description: 'Availability of an entry stamp from a Turkish airport on your passport proving the date of entry to Turkey',
+            img: " ",
+            answers: [
+              { text: 'yes', correct: true, hasq: true },
+              { text: 'no', correct: false },
+            ]
+          })
+
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 10, 0, {
+              type: 'yesno',
+              question: "Do you have an agency to handle Turkish citizenship for you and your spouse?",
+              description: 'You and your wife must obtain a power of attorney for a real estate attorney in order to manage the process of obtaining Turkish citizenship',
+              img: images[23],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 11, 0, {
+              type: 'yesno',
+              question: "Do you have a real estate title deed 'Tabu' for your property in Turkey?",
+              description: 'Tapu is the document that proves your purchase of a property in Turkey',
+              img: images[19],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 12, 0, {
+              type: 'yesno',
+              question: "Do you hold a document 'corresponding to Turkish citizenship'?",
+              description: 'It is a necessary document and trust that proves from the Turkish competent authorities and shows that your property conforms to the specifications for obtaining Turkish citizenship',
+              img: images[27],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 13, 0, {
+              type: 'yesno',
+              question: "Have you obtained an investor residence in Turkey?",
+              description: 'This document is granted by the Immigration Department of the Turkish Ministry of the Interior if you have previously applied for it',
+              img: images[22],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 14, 0, {
+              type: 'yesno',
+              question: "Do you have a real estate appraisal document for your property in Turkey?",
+              description: 'This document is granted by companies licensed in Turkey and proves the actual property value',
+              img: images[20],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 15, 0, {
+              type: 'yesno',
+              question: "Do you have a file 'Application for Turkish Citizenship Through Real Estate Ownership'?",
+              description: 'This file includes all the above-mentioned papers',
+              img: images[25],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 16, 0, {
+              type: 'yesno',
+              question: "Did you pay tax of 15 Turkish liras in Ziraat Bank?",
+              description: 'If you have paid the tax, you must have a notice of it',
+              img: images[24],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 17, 0, {
+              type: 'yesno',
+              question: "Do you have a bank receipt “from the customer” for the value of the real estate you have purchased?",
+              description: 'Bank receipts are proof that you have paid the value of the property, and their value must not be less than $250,000',
+              img: images[21],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 18, 0, {
+              type: 'yesno',
+              question: "Do you have a 'Swift' bank transfer if the transfer is made from outside Turkey?",
+              description: 'The bank through which you transferred the property value from your account to the seller\'s account is required',
+              img: images[26],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+            questions.splice(currentQuestionIndex + 19, 0, {
+              type: 'yesno',
+              question: "Do you have a bank receipt “from the project” for the value of the properties you have purchased?",
+              description: 'The bank through which you transferred the property value from your account to the seller\'s account is required',
+              img: images[21],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          break
+        case "Do you have a marriage contract?":
+          if (questions[currentQuestionIndex + 1].question == "Is your marriage contract translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is your marriage contract translated into Turkish?",
+              description: 'Your marriage contract must be translated into Turkish, or you must take the initiative to translate it before submitting your papers to the competent authorities',
+              img: images[14],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          break
+        case "Do you have an address proof document (residency deed) in your country of residence?":
+          if (questions[currentQuestionIndex + 1].question == "Is your marriage contract translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is your residence document translated into Turkish?",
+              description: 'You must have a translation of your residence document into Turkish',
+              img: images[14],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          break
+        case "Do you have proof of celibacy?":
+          if (questions[currentQuestionIndex + 1].question == "Is proof of your celibacy translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is proof of your celibacy translated into Turkish?",
+              description: 'You must have a translation to prove your celibacy into Turkish',
+              img: images[27],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          break
+        case "Do you have a family statement?":
+          if (questions[currentQuestionIndex + 1].question == "Is proof of your celibacy translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is your family statement translated into Turkish?",
+              description: 'You must have a translation of your family statement into Turkish',
+              img: images[27],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          break
+        case "Do you have a valid passport?":
+          //if yes
+          if (questions[currentQuestionIndex + 1].question == "Is your passport translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is your passport translated into Turkish?",
+              description: 'You must have a translation of your passport into Turkish',
+              img: images[8],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          //if no
+          if (questions[currentQuestionIndex + 1].question == "Do you have proof of citizenship?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "no") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Do you have proof of citizenship?",
+              description: 'It is a document showing your mother\'s nationality',
+              img: images[27],
+              answers: [
+                { text: 'yes', correct: true, hasq: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          break
+        case "Do you have proof of citizenship?":
+          if (questions[currentQuestionIndex + 1].question == "Is proof of citizenship translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is proof of citizenship translated into Turkish?",
+              description: 'You must have a translation of your proof of citizenship into Turkish',
+              img: images[28],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+
+          break
+        case "Do you have a birth certificate?":
+          if (questions[currentQuestionIndex + 1].question == "Is your birth certificate translated into Turkish?") {
+            questions.splice(currentQuestionIndex + 1, 1)
+          }
+          if (answer == "yes") {
+            questions.splice(currentQuestionIndex + 1, 0, {
+              type: 'yesno',
+              question: "Is your birth certificate translated into Turkish?",
+              description: 'You must have a translation of your birth certificate or take the initiative to translate it into Turkish',
+              img: images[10],
+              answers: [
+                { text: 'yes', correct: true },
+                { text: 'no', correct: false },
+              ]
+            })
+          }
+          break
+      }
+    }
+    var marred = false;
+    function insertResults(ques, ans) {
+
+      console.log(ques + " " + ans)
+      if (ques == 'To be contacted, fill out the following form and click send:') {
+        Results.push({ question: "Name", answer: document.getElementById("name").value })
+        Results.push({ question: "Surename", answer: document.getElementById("lname").value })
+        Results.push({ question: "Email", answer: document.getElementById("email").value })
+        Results.push({ question: "Mobile Number", answer: document.getElementById("mobile").value })
+
+
+      } else {
+        if (ans == true) {
+          ans = "Yes"
+        }
+        if (ans == false) {
+          ans = "No"
+        }
+        if (ans.includes('data-correct=')) {
+          ans = ans.substring(0, ans.indexOf(' data-correct='))
+        }
+        Results.push({ question: ques, answer: ans })
+      }
+    }
+
+    const Results = []
+
+
+
+
+
+  </script>
+
+  <script data-b24-form="inline/31/ah4otj" data-skip-moving="true">  </script>
+</body>
+
+</html>
